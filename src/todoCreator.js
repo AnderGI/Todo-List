@@ -1,15 +1,17 @@
 
-
 export const todoCreator = ()=>{
-
 const title = document.getElementById('title') //INPUT TEXT 
+const dueDate = document.getElementById('dueDate')
+const description = document.getElementById('description')
 return{
-    createTodo: ()=>{
-       
-            //const todo = addTodoToDOM(title.value)
-            //todo.append()
+    setTitle: ()=>{
             return title.value
-     
+    },
+    setDate: ()=>{
+        return dueDate.value
+    },
+    setDescription: ()=>{
+        return description.value
     }
 }
 
