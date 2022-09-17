@@ -14,24 +14,30 @@ export const addTodoToDOM = ()=>{
         display:flex;
         flex-flow:row wrap;
         `
+        TitleDateAndDescription.setAttribute('id', todo.setTitle())
             const title = document.createElement('h1')
-            title.textContent = todo.setTitle()
+            title.innerHTML = todo.setTitle()
             TitleAndDateContainer.appendChild(title)
 
             const dueDate = document.createElement('p')
-            dueDate.textContent = todo.setDate()
+            dueDate.innerHTML = todo.setDate()
             TitleAndDateContainer.appendChild(dueDate)
 
 
         TitleDateAndDescription.appendChild(TitleAndDateContainer)
 
         const description = document.createElement('p')
-        description.textContent = todo.setDescription()
+        description.innerHTML = todo.setDescription()
         TitleDateAndDescription.appendChild(description)
-        
+
+        const removeBtn = document.createElement('button')
+        removeBtn.setAttribute('id', 'removerBtn')
+        TitleDateAndDescription.appendChild(removeBtn)
+
     const todoSection = document.getElementById('todoSection')
 
     return{
-        append: ()=> todoSection.appendChild(TitleDateAndDescription)
+        append: ()=> todoSection.appendChild(TitleDateAndDescription),
+        returnNode: ()=> TitleDateAndDescription
     }
 }
