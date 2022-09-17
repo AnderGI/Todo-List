@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodoToDOM\": () => (/* binding */ addTodoToDOM)\n/* harmony export */ });\nconst addTodoToDOM = ()=>{\n    const container = document.createElement('div')\n    const title = document.createElement('h1')\n    title.textContent = `This is a title`\n    container.appendChild(title)\n\n    const todoSection = document.getElementById('todoSection')\n    return{\n        append: ()=> todoSection.appendChild(container)\n    }\n}\n\n//# sourceURL=webpack://todo-list/./src/DOMdisplayer.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodoToDOM\": () => (/* binding */ addTodoToDOM)\n/* harmony export */ });\n/* harmony import */ var _todoCreator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoCreator */ \"./src/todoCreator.js\");\n\nconst addTodoToDOM = ()=>{\n    const ti = (0,_todoCreator__WEBPACK_IMPORTED_MODULE_0__.todoCreator)()\n    const container = document.createElement('div')\n    const title = document.createElement('h1')\n    title.textContent = ti.createTodo()\n    container.appendChild(title)\n\n    const todoSection = document.getElementById('todoSection')\n    return{\n        append: ()=> todoSection.appendChild(container)\n    }\n}\n\n//# sourceURL=webpack://todo-list/./src/DOMdisplayer.js?");
 
 /***/ }),
 
@@ -136,7 +136,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _dialogShower__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialogShower */ \"./src/dialogShower.js\");\n/* harmony import */ var _DOMdisplayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DOMdisplayer */ \"./src/DOMdisplayer.js\");\n\n\n\n\nconst obj = (0,_dialogShower__WEBPACK_IMPORTED_MODULE_1__.log)()\n\nconst addBTn = document.getElementById('addTodo')\naddBTn.addEventListener('click', obj.logOut)\n\n\n\nconst formBtn = document.getElementById('add')\nformBtn.addEventListener('click', ()=>{\n    const todo = (0,_DOMdisplayer__WEBPACK_IMPORTED_MODULE_2__.addTodoToDOM)()\n    todo.append()\n})\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _dialogShower__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialogShower */ \"./src/dialogShower.js\");\n/* harmony import */ var _DOMdisplayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DOMdisplayer */ \"./src/DOMdisplayer.js\");\n\n\n\n\n\nconst obj = (0,_dialogShower__WEBPACK_IMPORTED_MODULE_1__.log)()\n\nconst addBTn = document.getElementById('addTodo')\naddBTn.addEventListener('click', obj.logOut)\nconst formBtn = document.getElementById('add') //DIALOG BTN\n\n\nformBtn.addEventListener('click', ()=>{\n    const obj1 = (0,_DOMdisplayer__WEBPACK_IMPORTED_MODULE_2__.addTodoToDOM)()\n    obj1.append()\n})\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/todoCreator.js":
+/*!****************************!*\
+  !*** ./src/todoCreator.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"todoCreator\": () => (/* binding */ todoCreator)\n/* harmony export */ });\n\n\nconst todoCreator = ()=>{\n\nconst title = document.getElementById('title') //INPUT TEXT \nreturn{\n    createTodo: ()=>{\n       \n            //const todo = addTodoToDOM(title.value)\n            //todo.append()\n            return title.value\n     \n    }\n}\n\n}\n\n\n//# sourceURL=webpack://todo-list/./src/todoCreator.js?");
 
 /***/ })
 
