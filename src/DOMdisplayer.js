@@ -1,5 +1,4 @@
 import { todoCreator } from "./todoCreator"
-
 export const addTodoToDOM = ()=>{
     const todo = todoCreator() //create an object from the todoCreator factory
 
@@ -14,7 +13,7 @@ export const addTodoToDOM = ()=>{
         display:flex;
         flex-flow:row wrap;
         `
-        TitleDateAndDescription.setAttribute('id', todo.setTitle())
+        //TitleDateAndDescription.setAttribute('id', todo.setTitle())
             const title = document.createElement('h1')
             title.innerHTML = todo.setTitle()
             TitleAndDateContainer.appendChild(title)
@@ -30,9 +29,9 @@ export const addTodoToDOM = ()=>{
         description.innerHTML = todo.setDescription()
         TitleDateAndDescription.appendChild(description)
 
-        const removeBtn = document.createElement('button')
-        removeBtn.setAttribute('id', 'removerBtn')
-        TitleDateAndDescription.appendChild(removeBtn)
+        //const removeBtn = document.createElement('button')
+        //removeBtn.setAttribute('id', 'removeBtn')
+        //TitleDateAndDescription.appendChild(removeBtn)
 
     const todoSection = document.getElementById('todoSection')
 

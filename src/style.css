@@ -2,25 +2,100 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --peach:#FCEDDA;
+    --burntOrange: #EE4E34;
+    --beige: #DDC3A5;
+    --paleYellow:#FBF8BE;
+    --royalBlue:#234E70;
+    --darkBlue: rgb(50,50,60);
+    --darkWhite: rgba(255, 250, 250, 0.75);
 }
+
 body{
+    display: grid;
+    grid-template-rows: 0.5fr 4fr;
     width: 100vw;
     height: 100vh;
+}
+header{
+    display: grid;
+    grid-template-columns: 0.25fr 0.75fr;
+    align-items: center;
 
+    position: sticky;
+    background-color: var(--darkBlue);
+}
+header > :first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header > :first-child > h1{
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--darkWhite);
+    font-weight: 900;
+    font-size: 2em;
+}
+
+header > :last-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+header > :last-child > button{
+    text-transform: lowercase;
+    font-weight: 900;
+
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+
+    color:var(--royalBlue);
+    padding: 0.5em 3em;
+    border-radius: 10px;
+    border: 2px solid var(--darkBlue);
+    background-color:rgba(0,0,0,0);
+    transition: all 0.2 ease;
+
+}
+header > :last-child > button:hover{
+    border: 2px solid var(--darkWhite);
+    color:var(--darkWhite) ;
+}
+
+
+
+
+
+
+
+
+main{
     display: grid;
     grid-template-columns: 1fr 3fr;
+    background-color: var(--darkBlue);
 }
-body>section{
-    border: 2px solid black;
-    height: 100vh;
+
+
+/*DIV*/
+
+#todoSection>div{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 1em;
+    color: var(--darkWhite);
 }
-#todoSection{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
+
+
+
+
+
 
 
 /*AddTodo Btn*/
+/*
 button#addTodo{
     padding: 4em;
     border-radius: 50%;
@@ -32,11 +107,13 @@ button#addTodo{
     right: 15px;
     
 }
-
+*/
 /*Dialog*/
+/*
 dialog#popUp{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+*/
