@@ -1,4 +1,5 @@
 import { fieldCreator } from "./fieldCreator";
+
  export const fieldIndoAdder = () =>{
     const fieldTitleInput = document.getElementById('fieldTitle')
     
