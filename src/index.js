@@ -1,11 +1,13 @@
 import './style.css';
 import { fieldDisplayer } from './fieldDisplayer';
 
+
 (function(){
     const addFielBtn = document.getElementById('addField')
     const fieldPopUp = document.getElementById('fieldPopUp')
     const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
     const fieldTitleInput = document.getElementById('fieldTitle')
+    
 
     addFielBtn.addEventListener('click',()=>{
        fieldTitleInput.value=""
@@ -14,7 +16,8 @@ import { fieldDisplayer } from './fieldDisplayer';
     addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldPopUp.close()
         const fieldObj = fieldDisplayer()
-       fieldObj.displayField()
+        fieldObj.displayField()
+       
     })
 
 

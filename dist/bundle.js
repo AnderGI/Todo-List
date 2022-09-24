@@ -110,6 +110,16 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/arrayOfField.js":
+/*!*****************************!*\
+  !*** ./src/arrayOfField.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addArrayToField\": () => (/* binding */ addArrayToField)\n/* harmony export */ });\nlet arrayOfFields = []\r\nconst addArrayToField = (obj) => {\r\n    arrayOfFields.push(obj)\r\n    console.log(arrayOfFields)\r\n}\n\n//# sourceURL=webpack://todo-list/./src/arrayOfField.js?");
+
+/***/ }),
+
 /***/ "./src/fieldCreator.js":
 /*!*****************************!*\
   !*** ./src/fieldCreator.js ***!
@@ -146,7 +156,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldDisplayer */ \"./src/fieldDisplayer.js\");\n\r\n\r\n\r\n(function(){\r\n    const addFielBtn = document.getElementById('addField')\r\n    const fieldPopUp = document.getElementById('fieldPopUp')\r\n    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')\r\n    const fieldTitleInput = document.getElementById('fieldTitle')\r\n\r\n    addFielBtn.addEventListener('click',()=>{\r\n     //   const fieldObj = fieldDisplayer()\r\n       // fieldObj.displayField()\r\n       fieldTitleInput.value=\"\"\r\n       fieldPopUp.showModal()\r\n    })\r\n    addFieldPopUpBtn.addEventListener('click', ()=>{\r\n        fieldPopUp.close()\r\n        const fieldObj = (0,_fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__.fieldDisplayer)()\r\n       fieldObj.displayField()\r\n    })\r\n\r\n\r\n\r\n\r\n\r\n    \r\n    \r\n})();\r\n\r\n\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldDisplayer */ \"./src/fieldDisplayer.js\");\n/* harmony import */ var _arrayOfField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./arrayOfField */ \"./src/arrayOfField.js\");\n\r\n\r\n\r\n\r\n(function(){\r\n    const addFielBtn = document.getElementById('addField')\r\n    const fieldPopUp = document.getElementById('fieldPopUp')\r\n    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')\r\n    const fieldTitleInput = document.getElementById('fieldTitle')\r\n    \r\n\r\n    addFielBtn.addEventListener('click',()=>{\r\n       fieldTitleInput.value=\"\"\r\n       fieldPopUp.showModal()\r\n    })\r\n    addFieldPopUpBtn.addEventListener('click', ()=>{\r\n        fieldPopUp.close()\r\n        const fieldObj = (0,_fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__.fieldDisplayer)()\r\n        fieldObj.displayField()\r\n        ;(0,_arrayOfField__WEBPACK_IMPORTED_MODULE_2__.addArrayToField)(fieldObj)\r\n    })\r\n\r\n\r\n\r\n\r\n\r\n    \r\n    \r\n})();\r\n\r\n\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ })
 
