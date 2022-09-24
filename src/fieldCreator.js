@@ -5,10 +5,17 @@ export const fieldCreator = (informationObj) =>{
 
     const notesEl = document.createElement('h1')
     notesEl.textContent = "Notes"
-    todoEl.onclick = function(){
-        todoEl.classList.toggle('active')
-   
+    //ejemplo
+    const fieldElements = document.querySelectorAll("#fieldContainer>*")
+    for (let field of fieldElements){
+        field.onclick= function(){
+            for(let field of fieldElements){
+                field.classList.remove('active')
+            }
+            this.classList.add('active')
+        }
     }
+    //ejemplo
 
     const todoTitle = document.createElement('h1')
     todoTitle.textContent = informationObj.title
