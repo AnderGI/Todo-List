@@ -110,13 +110,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/addTodoToField.js":
+/*!*******************************!*\
+  !*** ./src/addTodoToField.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTodoToFieldDOM\": () => (/* binding */ addTodoToFieldDOM)\n/* harmony export */ });\nconst addTodoToFieldDOM = (element) =>{\r\n    if(element.classList.contains('active')){\r\n        console.log('this ' + element + ' contains an active class')\r\n    }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/addTodoToField.js?");
+
+/***/ }),
+
 /***/ "./src/fieldCreator.js":
 /*!*****************************!*\
   !*** ./src/fieldCreator.js ***!
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldCreator\": () => (/* binding */ fieldCreator)\n/* harmony export */ });\n\r\nconst fieldCreator = (informationObj) =>{\r\n    const todoEl = document.createElement('div')\r\n    todoEl.setAttribute('class', 'fieldElement')\r\n\r\n    const notesEl = document.createElement('h1')\r\n    notesEl.textContent = \"Notes\"\r\n    //ejemplo\r\n    const fieldElements = document.querySelectorAll(\"#fieldContainer>*\")\r\n    for (let field of fieldElements){\r\n        field.onclick= function(){\r\n            for(let field of fieldElements){\r\n                field.classList.remove('active')\r\n            }\r\n            this.classList.add('active')\r\n        }\r\n    }\r\n    //ejemplo\r\n\r\n    const todoTitle = document.createElement('h1')\r\n    todoTitle.textContent = informationObj.title\r\n    \r\n    todoEl.appendChild(todoTitle)\r\n    return{\r\n        createTodo: ()=> todoEl,\r\n    }\r\n\r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldCreator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldCreator\": () => (/* binding */ fieldCreator)\n/* harmony export */ });\n/* harmony import */ var _addTodoToField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addTodoToField */ \"./src/addTodoToField.js\");\n\r\nconst fieldCreator = (informationObj) =>{\r\n    const todoEl = document.createElement('div')\r\n    todoEl.setAttribute('class', 'fieldElement')\r\n\r\n    const notesEl = document.createElement('h1')\r\n    notesEl.textContent = \"Notes\"\r\n    const fieldElements = document.querySelectorAll(\"#fieldContainer>*\")\r\n    //change active class from one to another project when clicking on it\r\n    for(let field of fieldElements){\r\n        field.onclick= function(){\r\n            for(let field of fieldElements){\r\n                field.classList.remove('active')\r\n            }\r\n            this.classList.add('active')\r\n            document.getElementById('todoSection').textContent = this.textContent\r\n        }\r\n    }\r\n    \r\n  \r\n\r\n    const todoTitle = document.createElement('h1')\r\n    todoTitle.textContent = informationObj.title\r\n    \r\n    todoEl.appendChild(todoTitle)\r\n    return{\r\n        createTodo: ()=> todoEl,\r\n    }\r\n\r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldCreator.js?");
 
 /***/ }),
 
