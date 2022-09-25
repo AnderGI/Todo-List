@@ -32,8 +32,16 @@ import { todoInfoAdder } from './todoInfoAdder';
     })
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close()
-        const todoObj = todoInfoAdder()
-        document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
+        const fieldContainer = document.querySelectorAll('#fieldContainer>*')
+        for(let field of fieldContainer){
+
+            if(field.classList.contains('active')){
+                const todoObj = todoInfoAdder()
+                document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
+            }
+        }
+        //const todoObj = todoInfoAdder()
+        //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
     })    
     
 })();

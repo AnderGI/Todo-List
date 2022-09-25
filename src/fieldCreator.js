@@ -7,12 +7,14 @@ export const fieldCreator = (informationObj) =>{
     const fieldElements = document.querySelectorAll("#fieldContainer>*")
     //change active class from one to another project when clicking on it
     for(let field of fieldElements){
+        const todoSection = document.getElementById('todoSection')
         field.onclick= function(){
             for(let field of fieldElements){
                 field.classList.remove('active')
+                todoSection.textContent = " "
             }
             this.classList.add('active')
-            const todoSection = document.getElementById('todoSection')
+            
             //todoSection.textContent = this.textContent
         }
     }
