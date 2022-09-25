@@ -1,6 +1,6 @@
 import './style.css';
 import { fieldDisplayer } from './fieldDisplayer';
-
+import { todoInfoAdder } from './todoInfoAdder';
 
 (function(){
     const addFielBtn = document.getElementById('addField')
@@ -21,10 +21,20 @@ import { fieldDisplayer } from './fieldDisplayer';
     })
 
 
+    const addTodoBtn = document.getElementById('addTodo')
+    const todoPopUp = document.getElementById('todoPopUp')
+    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
+    const todoTitleInput = document.getElementById('todoTitle')
 
-
-
-    
+    addTodoBtn.addEventListener('click', ()=>{
+        todoTitleInput.value= ''
+        todoPopUp.showModal()
+    })
+    addTodoPopUpBtn.addEventListener('click', ()=>{
+        todoPopUp.close()
+        const todoObj = todoInfoAdder()
+        document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
+    })    
     
 })();
 

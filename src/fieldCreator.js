@@ -1,10 +1,9 @@
-import { addTodoToFieldDOM } from "./addTodoToField"
+
 export const fieldCreator = (informationObj) =>{
     const todoEl = document.createElement('div')
     todoEl.setAttribute('class', 'fieldElement')
 
-    const notesEl = document.createElement('h1')
-    notesEl.textContent = "Notes"
+  
     const fieldElements = document.querySelectorAll("#fieldContainer>*")
     //change active class from one to another project when clicking on it
     for(let field of fieldElements){
@@ -13,7 +12,8 @@ export const fieldCreator = (informationObj) =>{
                 field.classList.remove('active')
             }
             this.classList.add('active')
-            document.getElementById('todoSection').textContent = this.textContent
+            const todoSection = document.getElementById('todoSection')
+            //todoSection.textContent = this.textContent
         }
     }
     
