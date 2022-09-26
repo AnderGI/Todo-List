@@ -1,6 +1,8 @@
 import './style.css';
-import { fieldDisplayer } from './fieldDisplayer';
+
 import { todoInfoAdder } from './todoInfoAdder';
+import { fieldObjectCreator } from './fieldObjectCreator';
+import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
 
 (function(){
     const addFielBtn = document.getElementById('addField')
@@ -15,8 +17,10 @@ import { todoInfoAdder } from './todoInfoAdder';
     })
     addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldPopUp.close()
-        const fieldObj = fieldDisplayer()
-        fieldObj.displayField()
+        //const fieldObj = fieldDisplayer()
+        //fieldObj.displayField()
+        //console.log(fieldObjectCreator(fieldTitleInput.value).title)
+        fieldDOMCreatorElement(fieldObjectCreator(fieldTitleInput.value))
        
     })
 
@@ -32,16 +36,11 @@ import { todoInfoAdder } from './todoInfoAdder';
     })
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close()
-        const fieldContainer = document.querySelectorAll('#fieldContainer>*')
-        for(let field of fieldContainer){
-
-            if(field.classList.contains('active')){
-                const todoObj = todoInfoAdder()
-                document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
-            }
-        }
-        //const todoObj = todoInfoAdder()
+        const todoSection = document.getElementById('todoSection')
+        const todoObj = todoInfoAdder()
         //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
+        localStorage.setItem('objeto', JSON.stringify(todoObj))
+        todoSection.textContent = localStorage.getItem('objeto')
     })    
     
 })();

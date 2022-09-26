@@ -1,4 +1,4 @@
-
+/*
 export const fieldCreator = (informationObj) =>{
     const todoEl = document.createElement('div')
     todoEl.setAttribute('class', 'fieldElement')
@@ -30,3 +30,4 @@ export const fieldCreator = (informationObj) =>{
     }
 
 }
+*/
