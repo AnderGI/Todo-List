@@ -1,8 +1,9 @@
 import './style.css';
 
-import { todoInfoAdder } from './todoInfoAdder';
 import { fieldObjectCreator } from './fieldObjectCreator';
 import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
+import { todoCreator } from './todoCreator';
+import { todoDOMrenderer } from './todoDOMCreatorElement';
 
 (function(){
     const addFielBtn = document.getElementById('addField')
@@ -36,11 +37,12 @@ import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
     })
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close()
-        const todoSection = document.getElementById('todoSection')
-        const todoObj = todoInfoAdder()
+        //const todoSection = document.getElementById('todoSection')
+        //const todoObj = todoInfoAdder()
         //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
-        localStorage.setItem('objeto', JSON.stringify(todoObj))
-        todoSection.textContent = localStorage.getItem('objeto')
+        //localStorage.setItem('objeto', JSON.stringify(todoObj))
+        //todoSection.textContent = localStorage.getItem('objeto')
+        todoDOMrenderer(todoCreator(todoTitleInput.value))
     })    
     
 })();
