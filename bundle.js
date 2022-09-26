@@ -110,33 +110,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
-/***/ "./src/fieldCreator.js":
-/*!*****************************!*\
-  !*** ./src/fieldCreator.js ***!
-  \*****************************/
+/***/ "./src/fieldDOMCreatorElement.js":
+/*!***************************************!*\
+  !*** ./src/fieldDOMCreatorElement.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldCreator\": () => (/* binding */ fieldCreator)\n/* harmony export */ });\n\r\nconst fieldCreator = (informationObj) =>{\r\n    const todoEl = document.createElement('div')\r\n    todoEl.setAttribute('class', 'fieldElement')\r\n\r\n  \r\n    const fieldElements = document.querySelectorAll(\"#fieldContainer>*\")\r\n    //change active class from one to another project when clicking on it\r\n    for(let field of fieldElements){\r\n        const todoSection = document.getElementById('todoSection')\r\n        field.onclick= function(){\r\n            for(let field of fieldElements){\r\n                field.classList.remove('active')\r\n                todoSection.textContent = \" \"\r\n            }\r\n            this.classList.add('active')\r\n            \r\n            //todoSection.textContent = this.textContent\r\n        }\r\n    }\r\n    \r\n  \r\n\r\n    const todoTitle = document.createElement('h1')\r\n    todoTitle.textContent = informationObj.title\r\n    \r\n    todoEl.appendChild(todoTitle)\r\n    return{\r\n        createTodo: ()=> todoEl,\r\n    }\r\n\r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldCreator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldDOMCreatorElement\": () => (/* binding */ fieldDOMCreatorElement)\n/* harmony export */ });\n/* harmony import */ var _toggleFieldClasses__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toggleFieldClasses */ \"./src/toggleFieldClasses.js\");\n\r\nconst fieldDOMCreatorElement = (object) => {\r\n    let fieldElement = document.createElement('div')\r\n    fieldElement.setAttribute('class', 'fieldElement')\r\n\r\n    let fieldTitle = document.createElement('h1')\r\n\r\n    fieldTitle.textContent = object.title\r\n\r\n    fieldElement.appendChild(fieldTitle)\r\n\r\n    const fieldContainer = document.getElementById('fieldContainer')\r\n    fieldContainer.appendChild(fieldElement)\r\n\r\n    ;(0,_toggleFieldClasses__WEBPACK_IMPORTED_MODULE_0__.toggleFieldClasses)()\r\n    \r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldDOMCreatorElement.js?");
 
 /***/ }),
 
-/***/ "./src/fieldDisplayer.js":
-/*!*******************************!*\
-  !*** ./src/fieldDisplayer.js ***!
-  \*******************************/
+/***/ "./src/fieldObjectCreator.js":
+/*!***********************************!*\
+  !*** ./src/fieldObjectCreator.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldDisplayer\": () => (/* binding */ fieldDisplayer)\n/* harmony export */ });\n/* harmony import */ var _fieldInfoAdder__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fieldInfoAdder */ \"./src/fieldInfoAdder.js\");\n\r\nconst fieldDisplayer = () => {\r\n    const fieldContainer = document.getElementById('fieldContainer')\r\n    const fieldItem = (0,_fieldInfoAdder__WEBPACK_IMPORTED_MODULE_0__.fieldIndoAdder)()\r\n    return{\r\n        displayField: ()=>fieldContainer.appendChild(fieldItem.infoAddedToField()),\r\n    }\r\n    \r\n    \r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldDisplayer.js?");
-
-/***/ }),
-
-/***/ "./src/fieldInfoAdder.js":
-/*!*******************************!*\
-  !*** ./src/fieldInfoAdder.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldIndoAdder\": () => (/* binding */ fieldIndoAdder)\n/* harmony export */ });\n/* harmony import */ var _fieldCreator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fieldCreator */ \"./src/fieldCreator.js\");\n\r\n\r\n const fieldIndoAdder = () =>{\r\n    const fieldTitleInput = document.getElementById('fieldTitle')\r\n    \r\n    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn') //repetition should not happen\r\n    let fieldObject = (0,_fieldCreator__WEBPACK_IMPORTED_MODULE_0__.fieldCreator)({ title: fieldTitleInput.value })\r\n    addFieldPopUpBtn.addEventListener('click',()=>{\r\n         fieldObject = (0,_fieldCreator__WEBPACK_IMPORTED_MODULE_0__.fieldCreator)({ title: fieldTitleInput.value })\r\n    })\r\n   \r\n    return{\r\n        infoAddedToField: () => fieldObject.createTodo(),\r\n    }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldInfoAdder.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fieldObjectCreator\": () => (/* binding */ fieldObjectCreator)\n/* harmony export */ });\nconst fieldObjectCreator = (titleValue)=>{\r\n    let field = {\r\n        title: titleValue,\r\n    }\r\n    return Object.assign(\r\n        { title: field.title },\r\n    )\r\n    \r\n}\n\n//# sourceURL=webpack://todo-list/./src/fieldObjectCreator.js?");
 
 /***/ }),
 
@@ -146,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldDisplayer */ \"./src/fieldDisplayer.js\");\n/* harmony import */ var _todoInfoAdder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todoInfoAdder */ \"./src/todoInfoAdder.js\");\n\r\n\r\n\r\n\r\n(function(){\r\n    const addFielBtn = document.getElementById('addField')\r\n    const fieldPopUp = document.getElementById('fieldPopUp')\r\n    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')\r\n    const fieldTitleInput = document.getElementById('fieldTitle')\r\n    \r\n\r\n    addFielBtn.addEventListener('click',()=>{\r\n       fieldTitleInput.value=\"\"\r\n       fieldPopUp.showModal()\r\n    })\r\n    addFieldPopUpBtn.addEventListener('click', ()=>{\r\n        fieldPopUp.close()\r\n        const fieldObj = (0,_fieldDisplayer__WEBPACK_IMPORTED_MODULE_1__.fieldDisplayer)()\r\n        fieldObj.displayField()\r\n       \r\n    })\r\n\r\n\r\n    const addTodoBtn = document.getElementById('addTodo')\r\n    const todoPopUp = document.getElementById('todoPopUp')\r\n    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')\r\n    const todoTitleInput = document.getElementById('todoTitle')\r\n\r\n    addTodoBtn.addEventListener('click', ()=>{\r\n        todoTitleInput.value= ''\r\n        todoPopUp.showModal()\r\n    })\r\n    addTodoPopUpBtn.addEventListener('click', ()=>{\r\n        todoPopUp.close()\r\n        const fieldContainer = document.querySelectorAll('#fieldContainer>*')\r\n        for(let field of fieldContainer){\r\n\r\n            if(field.classList.contains('active')){\r\n                const todoObj = (0,_todoInfoAdder__WEBPACK_IMPORTED_MODULE_2__.todoInfoAdder)()\r\n                document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())\r\n            }\r\n        }\r\n        //const todoObj = todoInfoAdder()\r\n        //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())\r\n    })    \r\n    \r\n})();\r\n\r\n\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _todoInfoAdder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todoInfoAdder */ \"./src/todoInfoAdder.js\");\n/* harmony import */ var _fieldObjectCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fieldObjectCreator */ \"./src/fieldObjectCreator.js\");\n/* harmony import */ var _fieldDOMCreatorElement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fieldDOMCreatorElement */ \"./src/fieldDOMCreatorElement.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n(function(){\r\n    const addFielBtn = document.getElementById('addField')\r\n    const fieldPopUp = document.getElementById('fieldPopUp')\r\n    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')\r\n    const fieldTitleInput = document.getElementById('fieldTitle')\r\n    \r\n\r\n    addFielBtn.addEventListener('click',()=>{\r\n       fieldTitleInput.value=\"\"\r\n       fieldPopUp.showModal()\r\n    })\r\n    addFieldPopUpBtn.addEventListener('click', ()=>{\r\n        fieldPopUp.close()\r\n        //const fieldObj = fieldDisplayer()\r\n        //fieldObj.displayField()\r\n        //console.log(fieldObjectCreator(fieldTitleInput.value).title)\r\n        ;(0,_fieldDOMCreatorElement__WEBPACK_IMPORTED_MODULE_3__.fieldDOMCreatorElement)((0,_fieldObjectCreator__WEBPACK_IMPORTED_MODULE_2__.fieldObjectCreator)(fieldTitleInput.value))\r\n       \r\n    })\r\n\r\n\r\n    const addTodoBtn = document.getElementById('addTodo')\r\n    const todoPopUp = document.getElementById('todoPopUp')\r\n    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')\r\n    const todoTitleInput = document.getElementById('todoTitle')\r\n\r\n    addTodoBtn.addEventListener('click', ()=>{\r\n        todoTitleInput.value= ''\r\n        todoPopUp.showModal()\r\n    })\r\n    addTodoPopUpBtn.addEventListener('click', ()=>{\r\n        todoPopUp.close()\r\n        const todoSection = document.getElementById('todoSection')\r\n        const todoObj = (0,_todoInfoAdder__WEBPACK_IMPORTED_MODULE_1__.todoInfoAdder)()\r\n        //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())\r\n        localStorage.setItem('objeto', JSON.stringify(todoObj))\r\n        todoSection.textContent = localStorage.getItem('objeto')\r\n    })    \r\n    \r\n})();\r\n\r\n\r\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -167,6 +157,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"todoInfoAdder\": () => (/* binding */ todoInfoAdder)\n/* harmony export */ });\n/* harmony import */ var _todoCreator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoCreator */ \"./src/todoCreator.js\");\n\r\nconst todoInfoAdder = ()=>{\r\n    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')\r\n    const todoTitleInput = document.getElementById('todoTitle')\r\n    let todoWithInfoEl = (0,_todoCreator__WEBPACK_IMPORTED_MODULE_0__.todoCreator)({ title: todoTitleInput.value })\r\n    addTodoPopUpBtn.addEventListener('click', ()=>{\r\n        todoWithInfoEl = (0,_todoCreator__WEBPACK_IMPORTED_MODULE_0__.todoCreator)({ title: todoTitleInput.value })\r\n    })\r\n    return{\r\n        infoAddedToTodo: ()=> todoWithInfoEl.todoCreated(),\r\n    }\r\n}\n\n//# sourceURL=webpack://todo-list/./src/todoInfoAdder.js?");
+
+/***/ }),
+
+/***/ "./src/toggleFieldClasses.js":
+/*!***********************************!*\
+  !*** ./src/toggleFieldClasses.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"toggleFieldClasses\": () => (/* binding */ toggleFieldClasses)\n/* harmony export */ });\nconst toggleFieldClasses= ()=>{\r\n  \r\n    const fieldContainer = document.querySelectorAll('#fieldContainer>*')\r\n    for(let field of fieldContainer){\r\n        field.onclick = function (){\r\n        for(let field of fieldContainer){\r\n            field.classList.remove('active')\r\n        }\r\n        this.classList.add('active')\r\n        }\r\n    }\r\n   \r\n}\n\n//# sourceURL=webpack://todo-list/./src/toggleFieldClasses.js?");
 
 /***/ })
 
