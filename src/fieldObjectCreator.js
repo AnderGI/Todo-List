@@ -3,7 +3,7 @@ export const fieldObjectCreator = (titleValue)=>{
         title: titleValue,
     }
     return Object.assign(
-        { title: field.title },
+        { title: field.title, },
     )
     
 }

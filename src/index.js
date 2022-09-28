@@ -34,11 +34,8 @@ import { todoDOMrenderer } from './todoDOMCreatorElement';
     })
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close() 
-        todoDOMrenderer(todoCreator(todoTitleInput.value))
-        //localStorage.setItem(fieldObjectCreator(fieldTitleInput.value).title,todoCreator(todoTitleInput.value).title)
-
+        todoDOMrenderer(todoCreator(todoTitleInput.value))        
     })    
-    
 })();
 
 
