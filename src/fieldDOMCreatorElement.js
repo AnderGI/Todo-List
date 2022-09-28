@@ -1,4 +1,5 @@
 import { toggleFieldClasses } from "./toggleFieldClasses"
+
 export const fieldDOMCreatorElement = (object) => {
     let fieldElement = document.createElement('div')
     fieldElement.setAttribute('class', 'fieldElement')

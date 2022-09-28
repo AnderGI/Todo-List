@@ -4,7 +4,7 @@ import { fieldObjectCreator } from './fieldObjectCreator';
 import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
 import { todoCreator } from './todoCreator';
 import { todoDOMrenderer } from './todoDOMCreatorElement';
-import { localStorageSetter } from './localStorageSetter';
+
 
 (function(){
     const addFielBtn = document.getElementById('addField')
@@ -19,13 +19,9 @@ import { localStorageSetter } from './localStorageSetter';
     })
     addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldPopUp.close()
-        //const fieldObj = fieldDisplayer()
-        //fieldObj.displayField()
-        //console.log(fieldObjectCreator(fieldTitleInput.value).title)
         fieldDOMCreatorElement(fieldObjectCreator(fieldTitleInput.value))
        
     })
-
 
     const addTodoBtn = document.getElementById('addTodo')
     const todoPopUp = document.getElementById('todoPopUp')
@@ -37,14 +33,9 @@ import { localStorageSetter } from './localStorageSetter';
         todoPopUp.showModal()
     })
     addTodoPopUpBtn.addEventListener('click', ()=>{
-        todoPopUp.close()
-        //const todoSection = document.getElementById('todoSection')
-        //const todoObj = todoInfoAdder()
-        //document.getElementById('todoSection').appendChild(todoObj.infoAddedToTodo())
-        //localStorage.setItem('objeto', JSON.stringify(todoObj))
-        //todoSection.textContent = localStorage.getItem('objeto')
+        todoPopUp.close() 
         todoDOMrenderer(todoCreator(todoTitleInput.value))
-        localStorageSetter(todoCreator(todoTitleInput.value))
+        //localStorage.setItem(fieldObjectCreator(fieldTitleInput.value).title,todoCreator(todoTitleInput.value).title)
 
     })    
     
