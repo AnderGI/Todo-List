@@ -4,6 +4,7 @@ import { fieldObjectCreator } from './fieldObjectCreator';
 import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
 import { todoCreator } from './todoCreator';
 import { todoDOMrenderer } from './todoDOMCreatorElement';
+import { localStorageSetter } from './localStorageSetter';
 
 (function(){
     const addFielBtn = document.getElementById('addField')
@@ -43,6 +44,8 @@ import { todoDOMrenderer } from './todoDOMCreatorElement';
         //localStorage.setItem('objeto', JSON.stringify(todoObj))
         //todoSection.textContent = localStorage.getItem('objeto')
         todoDOMrenderer(todoCreator(todoTitleInput.value))
+        localStorageSetter(todoCreator(todoTitleInput.value))
+
     })    
     
 })();
