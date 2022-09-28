@@ -25,17 +25,18 @@ import { todoDOMrenderer } from './todoDOMCreatorElement';
 
     const addTodoBtn = document.getElementById('addTodo')
     const todoPopUp = document.getElementById('todoPopUp')
-    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
+   // const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
     const todoTitleInput = document.getElementById('todoTitle')
 
     addTodoBtn.addEventListener('click', ()=>{
         todoTitleInput.value= ''
         todoPopUp.showModal()
     })
+    /*
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close() 
         todoDOMrenderer(todoCreator(todoTitleInput.value))        
-    })    
+    })*/    
 })();
 
 
