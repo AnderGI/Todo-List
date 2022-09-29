@@ -1,9 +1,11 @@
-export const fieldObjectCreator = (titleValue)=>{
-    let field = {
-        title: titleValue,
+export const fieldObject = (name)=>{
+    let field ={
+        name: name,
+        active: false,
+        id: Date.now().toString(),
     }
     return Object.assign(
-        { title: field.title, },
+        {},
+        field,
     )
-    
 }

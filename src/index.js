@@ -1,17 +1,15 @@
 import './style.css';
-
-import { fieldObjectCreator } from './fieldObjectCreator';
-import { fieldDOMCreatorElement } from './fieldDOMCreatorElement';
-import { todoCreator } from './todoCreator';
-import { todoDOMrenderer } from './todoDOMCreatorElement';
-
+import { fieldIndoAdder } from './fieldInfoAdder';
+import { addFieldToList } from './addFieldToList';
+import { fieldDOMRenderer } from './fieldDOM';
+import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
 
 (function(){
     const addFielBtn = document.getElementById('addField')
     const fieldPopUp = document.getElementById('fieldPopUp')
     const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
     const fieldTitleInput = document.getElementById('fieldTitle')
-    
+    let fieldList = []
 
     addFielBtn.addEventListener('click',()=>{
        fieldTitleInput.value=""
@@ -19,24 +17,30 @@ import { todoDOMrenderer } from './todoDOMCreatorElement';
     })
     addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldPopUp.close()
-        fieldDOMCreatorElement(fieldObjectCreator(fieldTitleInput.value))
-       
+        fieldIndoAdder()
+        addFieldToList(fieldList, fieldIndoAdder())
+        fieldDOMRenderer(fieldIndoAdder())
+        toggleFieldActiveStatus(fieldList) //maybe connect it with the array?
     })
+    
+  
+})();
 
-    const addTodoBtn = document.getElementById('addTodo')
+
+/** ESTO PARA TODOS
+ *   const addTodoBtn = document.getElementById('addTodo')
     const todoPopUp = document.getElementById('todoPopUp')
-   // const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
+    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
     const todoTitleInput = document.getElementById('todoTitle')
 
     addTodoBtn.addEventListener('click', ()=>{
         todoTitleInput.value= ''
         todoPopUp.showModal()
     })
-    /*
     addTodoPopUpBtn.addEventListener('click', ()=>{
         todoPopUp.close() 
-        todoDOMrenderer(todoCreator(todoTitleInput.value))        
-    })*/    
-})();
-
-
+             
+    })  
+ * 
+ * 
+ */
