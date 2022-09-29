@@ -3,8 +3,10 @@ import { fieldIndoAdder } from './fieldInfoAdder';
 import { addFieldToList } from './addFieldToList';
 import { fieldDOMRenderer } from './fieldDOM';
 import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
+import { addFieldFromArrayToLocalStorage } from './addFieldFromArrayToLocalStorage';
 
 (function(){
+    //localStorage.clear()
     const addFielBtn = document.getElementById('addField')
     const fieldPopUp = document.getElementById('fieldPopUp')
     const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
@@ -21,6 +23,7 @@ import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
         addFieldToList(fieldList, fieldIndoAdder())
         fieldDOMRenderer(fieldIndoAdder())
         toggleFieldActiveStatus(fieldList) //maybe connect it with the array?
+        addFieldFromArrayToLocalStorage(fieldList)
     })
     
   
