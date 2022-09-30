@@ -1,5 +1,8 @@
-export const fieldDOMRenderer = (array)=>{
+export const fieldDOMRenderer = ()=>{
     const fieldContainer = document.getElementById('fieldContainer')
+    let array = JSON.parse(localStorage.getItem('fields'))
+   
+    
     if(localStorage.getItem('fields') !== null){
         
             let div = document.createElement('div')

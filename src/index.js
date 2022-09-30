@@ -35,9 +35,9 @@ import { getLocalStorageItem } from './getLocalStorageItem';
         addFieldFromArrayToLocalStorage(fieldList)
 
         //desde array cojer info y pasarla al DOM
-        getLocalStorageItem(fieldList)
+        getLocalStorageItem()
 
-        fieldDOMRenderer(getLocalStorageItem(fieldList))
+        fieldDOMRenderer(fieldIndoAdder())
     })
     
   
