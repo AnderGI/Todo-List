@@ -4,6 +4,7 @@ import { addFieldToList } from './addFieldToList';
 import { fieldDOMRenderer } from './fieldDOM';
 import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
 import { addFieldFromArrayToLocalStorage } from './addFieldFromArrayToLocalStorage';
+import { localStorageGetter } from './localStorageIterator';
 
 (function(){
     //localStorage.clear()
@@ -24,8 +25,9 @@ import { addFieldFromArrayToLocalStorage } from './addFieldFromArrayToLocalStora
         fieldDOMRenderer(fieldIndoAdder())
         toggleFieldActiveStatus(fieldList) //maybe connect it with the array?
         addFieldFromArrayToLocalStorage(fieldList)
+        
     })
-    
+    localStorageGetter()
   
 })();
 
