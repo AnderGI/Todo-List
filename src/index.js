@@ -1,63 +1,44 @@
+import { set } from 'lodash';
 import './style.css';
-import { fieldIndoAdder } from './fieldInfoAdder';
-import { addFieldToList } from './addFieldToList';
-import { fieldDOMRenderer } from './fieldDOM';
-import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
-import { addFieldFromArrayToLocalStorage } from './addFieldFromArrayToLocalStorage';
-import { getLocalStorageItem } from './getLocalStorageItem';
+const addFielBtn = document.getElementById('addField')
+const fieldPopUp = document.getElementById('fieldPopUp')
+const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
+const fieldTitleInput = document.getElementById('fieldTitle') 
+let fieldArray = []   
+addFielBtn.addEventListener('click', ()=>{
+    fieldTitleInput.value = ""
+    fieldPopUp.showModal()
+})
+addFieldPopUpBtn.addEventListener('click', ()=>{
+    addToArray(fieldCreator(fieldTitleInput.value))
+    setFiedlToLocaleStorage()
+    getField()
+    fieldPopUp.close()
+})
 
-
-(function(){
-    //localStorage.clear()
-    const addFielBtn = document.getElementById('addField')
-    const fieldPopUp = document.getElementById('fieldPopUp')
-    const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
-    const fieldTitleInput = document.getElementById('fieldTitle')
-    let fieldList = []
-
-    addFielBtn.addEventListener('click',()=>{
-       fieldTitleInput.value=""
-       fieldPopUp.showModal()
-    })
-    addFieldPopUpBtn.addEventListener('click', ()=>{
-        fieldPopUp.close()
-       //coje obj field y añade info al clickar 
-       fieldIndoAdder() 
-
-        //añade a array 
-        addFieldToList(fieldList, fieldIndoAdder()) 
-
-         //coje el fieldContainer html y cada vez que se clicka añade a un active class
-         // ademas compara el id del elemento clickado con el objeto que tenga ese id en el array para cambiar active a true
-        toggleFieldActiveStatus(fieldList)
-
-        //añade desde field a localStorage
-        addFieldFromArrayToLocalStorage(fieldList)
-
-        //desde array cojer info y pasarla al DOM
-        getLocalStorageItem()
-
-        fieldDOMRenderer(fieldIndoAdder())
-    })
-    
-  
-})();
-
-
-/** ESTO PARA TODOS
- *   const addTodoBtn = document.getElementById('addTodo')
-    const todoPopUp = document.getElementById('todoPopUp')
-    const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
-    const todoTitleInput = document.getElementById('todoTitle')
-
-    addTodoBtn.addEventListener('click', ()=>{
-        todoTitleInput.value= ''
-        todoPopUp.showModal()
-    })
-    addTodoPopUpBtn.addEventListener('click', ()=>{
-        todoPopUp.close() 
-             
-    })  
- * 
- * 
- */
+const fieldCreator = (name)=>{
+    let field ={
+        name:name,
+        active: false,
+        id: Date.now().toString(),
+    }
+    return Object.assign(
+        {},
+        field,
+    )
+}
+const addToArray = (obj) => {
+    fieldArray.push(obj)
+}
+const setFiedlToLocaleStorage = ()=>{
+    let field = JSON.stringify(fieldArray)
+    localStorage.setItem('fields', field)
+}
+const getField = ()=>{
+    let field = JSON.parse(localStorage.getItem('fields'))
+    console.log(field)
+}
+if(JSON.parse(localStorage.getItem('fields'))){
+    fieldArray = JSON.parse(localStorage.getItem('fields'))
+    console.log(fieldArray)
+}
