@@ -12,7 +12,7 @@ export const toggleFieldActiveStatus = (array)=>{
                 object.active = true
             }
         })
-        console.log(array)
+        return array
         }
     }
    

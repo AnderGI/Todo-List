@@ -4,7 +4,8 @@ import { addFieldToList } from './addFieldToList';
 import { fieldDOMRenderer } from './fieldDOM';
 import { toggleFieldActiveStatus } from './toggleFieldActiveStatus';
 import { addFieldFromArrayToLocalStorage } from './addFieldFromArrayToLocalStorage';
-import { localStorageGetter } from './localStorageIterator';
+import { getLocalStorageItem } from './getLocalStorageItem';
+
 
 (function(){
     //localStorage.clear()
@@ -20,14 +21,25 @@ import { localStorageGetter } from './localStorageIterator';
     })
     addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldPopUp.close()
-        fieldIndoAdder()
-        addFieldToList(fieldList, fieldIndoAdder())
-        fieldDOMRenderer(fieldIndoAdder())
-        toggleFieldActiveStatus(fieldList) //maybe connect it with the array?
+       //coje obj field y añade info al clickar 
+       fieldIndoAdder() 
+
+        //añade a array 
+        addFieldToList(fieldList, fieldIndoAdder()) 
+
+         //coje el fieldContainer html y cada vez que se clicka añade a un active class
+         // ademas compara el id del elemento clickado con el objeto que tenga ese id en el array para cambiar active a true
+        toggleFieldActiveStatus(fieldList)
+
+        //añade desde field a localStorage
         addFieldFromArrayToLocalStorage(fieldList)
-        
+
+        //desde array cojer info y pasarla al DOM
+        getLocalStorageItem(fieldList)
+
+        fieldDOMRenderer(getLocalStorageItem(fieldList))
     })
-    localStorageGetter()
+    
   
 })();
 

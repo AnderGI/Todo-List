@@ -1,15 +1,21 @@
-export const fieldDOMRenderer = (object)=>{
+export const fieldDOMRenderer = (array)=>{
     const fieldContainer = document.getElementById('fieldContainer')
+    if(localStorage.getItem('fields') !== null){
+        
+            let div = document.createElement('div')
+            div.setAttribute('class', 'fieldElement')
+            div.setAttribute('id', array[array.length-1].id)
+        
+            let title = document.createElement('h1')
+            title.innerHTML = array[array.length-1].name
+        
+            div.appendChild(title)
+        
+            fieldContainer.appendChild(div)
+            
+    }
+    
 
-    let div = document.createElement('div')
-    div.setAttribute('class', 'fieldElement')
-    div.setAttribute('id', object.id)
-
-    let title = document.createElement('h1')
-    title.innerHTML = object.name
-
-    div.appendChild(title)
-
-    fieldContainer.appendChild(div)
 
 }
+
