@@ -38,29 +38,6 @@ const setFiedlToLocaleStorage = ()=>{
     localStorage.setItem('fields', field)
 }
 
-const getField = ()=>{
-    if(JSON.parse(localStorage.getItem('fields'))){
-        fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
-        //console.log(fieldArray)
-    }
-    
-}
-
-getField()
-
-const fieldContainer = document.getElementById('fieldContainer')
-const DOMrendererFromArray = (array) =>{
-    array.forEach(element=>{
-        let div = document.createElement('div')
-        div.setAttribute('class', 'fieldElement')
-        div.setAttribute('id', element.id)
-        div.textContent = element.name
-
-        fieldContainer.appendChild(div)
-    })
-}
-DOMrendererFromArray(fieldArray)
-
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
     for(let field of document.querySelectorAll('#fieldContainer>*')){
@@ -81,6 +58,32 @@ const toggleActiveProperty = ()=>{
     }
 }
 
+const getField = ()=>{
+    if(JSON.parse(localStorage.getItem('fields'))){
+        fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
+        console.log(fieldArray)
+        toggleActiveProperty()
+    }
+    
+}
+
+getField()
+
+const fieldContainer = document.getElementById('fieldContainer')
+const DOMrendererFromArray = (array) =>{
+    array.forEach(element=>{
+        let div = document.createElement('div')
+        div.setAttribute('class', 'fieldElement')
+        div.setAttribute('id', element.id)
+        div.textContent = element.name
+
+        fieldContainer.appendChild(div)
+    })
+    toggleActiveProperty()
+}
+DOMrendererFromArray(fieldArray)
+
+
 const DOMrenderer = (obj)=>{
     let div = document.createElement('div')
     div.setAttribute('class', 'fieldElement')
@@ -93,3 +96,10 @@ const DOMrenderer = (obj)=>{
 
 
 
+/*
+fieldArray.some(element =>{
+            if(element.active === true){
+                console.log(`This ${element.name} has an active status of ${element.active}`)
+            }
+        })
+*/
