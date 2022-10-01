@@ -41,8 +41,7 @@ const setFiedlToLocaleStorage = ()=>{
 const getField = ()=>{
     if(JSON.parse(localStorage.getItem('fields'))){
         fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
-        console.log(fieldArray)
-      //  DOMrendererFromArray(fieldArray)
+        //console.log(fieldArray)
     }
     
 }
@@ -62,6 +61,25 @@ const DOMrendererFromArray = (array) =>{
 }
 DOMrendererFromArray(fieldArray)
 
+//Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
+const toggleActiveProperty = ()=>{
+    for(let field of document.querySelectorAll('#fieldContainer>*')){
+        field.onclick = function(){
+            for(let field of document.querySelectorAll('#fieldContainer>*')){
+                field.classList.remove('active')
+            }
+            fieldArray.forEach(item=>{
+                if(this.getAttribute('id') === item.id){
+                    item.active = true
+                    this.classList.add('active')
+                } else{
+                    item.active = false
+                }
+                setFiedlToLocaleStorage()
+            })
+        }
+    }
+}
 
 const DOMrenderer = (obj)=>{
     let div = document.createElement('div')
@@ -70,28 +88,8 @@ const DOMrenderer = (obj)=>{
     div.textContent = obj.name
 
     fieldContainer.appendChild(div)
+    toggleActiveProperty()
 }
-//Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
-const toggleActiveProperty = ()=>{
-    for(let field of document.querySelectorAll('#fieldContainer>*')){
-        field.onclick = function(){
-            fieldArray.forEach(item=>{
-                if(this.getAttribute('id') === item.id){
-                    item.active = true
-                } else{
-                    item.active = false
-                }
-                setFiedlToLocaleStorage()
-            })
-            /*
-            fieldArray.some(item=>{ 
-                if(item.id === field.getAttribute('id')){
-                    item.active = true
-                }
-                setFiedlToLocaleStorage()
-            })
-            */
-        }
-    }
-}
-toggleActiveProperty()
+
+
+
