@@ -57,17 +57,25 @@ const toggleActiveProperty = ()=>{
         }
     }
 }
+const giveActiveStatusReload = ()=>{
+    fieldArray.some(element =>{
+        if(element.active === true){
+            console.log(`This ${element.name} has an active status of ${element.active}`)
+            for(let field of document.querySelectorAll('#fieldContainer>*')){
+                if(field.id === element.id && element.active === true){
+                    field.classList.add('active')
+                }
+            }
+        }
+    })
+}
 
 const getField = ()=>{
     if(JSON.parse(localStorage.getItem('fields'))){
         fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
         console.log(fieldArray)
         toggleActiveProperty()
-        fieldArray.some(element =>{
-            if(element.active === true){
-                console.log(`This ${element.name} has an active status of ${element.active}`)
-            }
-        })
+        giveActiveStatusReload()
     }
     
 }
@@ -85,6 +93,7 @@ const DOMrendererFromArray = (array) =>{
         fieldContainer.appendChild(div)
     })
     toggleActiveProperty()
+    giveActiveStatusReload()
 }
 DOMrendererFromArray(fieldArray)
 
