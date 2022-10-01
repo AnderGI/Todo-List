@@ -110,10 +110,5 @@ const DOMrenderer = (obj)=>{
 
 
 
-/*
-fieldArray.some(element =>{
-            if(element.active === true){
-                console.log(`This ${element.name} has an active status of ${element.active}`)
-            }
-        })
-*/
+//Once a div is active the name of thje object associated to it shold 
+//should appear in the field title text

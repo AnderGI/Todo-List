@@ -81,11 +81,51 @@ main{
 
 /*DIV TODO SECTION*/
 
-#todoSection>div{
+#todoSection{
+    display: grid;
+    grid-template-rows: 0.5fr 4fr;
+    padding: 0.5em;
+}
+#todoSection>h1{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 0em 0.5em;
+
+    color: var(--darkWhite);
+    text-transform: lowercase;
+    font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 900;
-    font-size: 1em;
+}
+#todoSection>div[data-todo-container]{
+    display: grid;
+    grid-template-rows: repeat(fit-content, 1fr);
+    padding: 0.75em 0.25em;
+    row-gap: 0.5em;
+}
+div[data-todo-container]>div{
+    border: 2px solid var(--darkWhite);
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 0.75em;
+    padding: 0.5em 0.25em;
+
     color: var(--darkWhite);
+    text-transform: lowercase;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    border-top:none;
+    border-right: none; 
+    border-radius: 10px;
+
+    box-shadow: -0.25em 0.025em 0.125em 0.0625em var(--darkWhite);
+}
+div[data-todo-container]>div>input#todoCheckbox{
+    width: 1.5em;
+    height: 1.5em;
 }
 
 
