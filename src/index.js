@@ -1,9 +1,10 @@
-import { set } from 'lodash';
+import { remove, set } from 'lodash';
 import './style.css';
 const addFielBtn = document.getElementById('addField')
 const fieldPopUp = document.getElementById('fieldPopUp')
 const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
+const fieldTodoTitle = document.querySelector('[data-field-title]')
 let fieldArray = []   
 addFielBtn.addEventListener('click', ()=>{
     fieldTitleInput.value = ""
@@ -38,6 +39,18 @@ const setFiedlToLocaleStorage = ()=>{
     localStorage.setItem('fields', field)
 }
 
+//Once a div is active the name of thje object associated to it shold 
+//should appear in the field title text
+const giveFieldTodoTitleAValue = () =>{
+    for(let field of document.querySelectorAll('#fieldContainer>*')){
+        fieldArray.some(object=>{
+            if(field.classList.contains('active') && field.getAttribute('id') === object.id){
+                fieldTodoTitle.innerHTML = object.name
+            }
+        })
+    }
+}
+
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
     for(let field of document.querySelectorAll('#fieldContainer>*')){
@@ -53,14 +66,15 @@ const toggleActiveProperty = ()=>{
                     item.active = false
                 }
                 setFiedlToLocaleStorage()
+                
             })
+            giveFieldTodoTitleAValue()
         }
     }
 }
 const giveActiveStatusReload = ()=>{
     fieldArray.some(element =>{
         if(element.active === true){
-            console.log(`This ${element.name} has an active status of ${element.active}`)
             for(let field of document.querySelectorAll('#fieldContainer>*')){
                 if(field.id === element.id && element.active === true){
                     field.classList.add('active')
@@ -68,7 +82,10 @@ const giveActiveStatusReload = ()=>{
             }
         }
     })
+    
 }
+
+
 
 const getField = ()=>{
     if(JSON.parse(localStorage.getItem('fields'))){
@@ -76,6 +93,7 @@ const getField = ()=>{
         console.log(fieldArray)
         toggleActiveProperty()
         giveActiveStatusReload()
+        giveFieldTodoTitleAValue()
     }
     
 }
@@ -89,11 +107,17 @@ const DOMrendererFromArray = (array) =>{
         div.setAttribute('class', 'fieldElement')
         div.setAttribute('id', element.id)
         div.textContent = element.name
-
+        let removeButton = document.createElement('button')
+        removeButton.setAttribute('class','removeButton')
+        removeButton.setAttribute('id', element.id)
+        removeButton.textContent = 'remove'
+        div.appendChild(removeButton)
         fieldContainer.appendChild(div)
     })
     toggleActiveProperty()
     giveActiveStatusReload()
+    giveFieldTodoTitleAValue()
+    
 }
 DOMrendererFromArray(fieldArray)
 
@@ -104,11 +128,15 @@ const DOMrenderer = (obj)=>{
     div.setAttribute('id', obj.id)
     div.textContent = obj.name
 
+    let removeButton = document.createElement('button')
+    removeButton.setAttribute('class','removeButton')
+    removeButton.textContent = 'remove'
+    removeButton.setAttribute('id', obj.id)
+    div.appendChild(removeButton)
+
     fieldContainer.appendChild(div)
     toggleActiveProperty()
+ 
 }
 
 
-
-//Once a div is active the name of thje object associated to it shold 
-//should appear in the field title text
