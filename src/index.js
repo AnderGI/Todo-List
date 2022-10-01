@@ -63,6 +63,11 @@ const getField = ()=>{
         fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
         console.log(fieldArray)
         toggleActiveProperty()
+        fieldArray.some(element =>{
+            if(element.active === true){
+                console.log(`This ${element.name} has an active status of ${element.active}`)
+            }
+        })
     }
     
 }
