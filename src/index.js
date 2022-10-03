@@ -5,6 +5,7 @@ const fieldPopUp = document.getElementById('fieldPopUp')
 const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
 const fieldTodoTitle = document.querySelector('[data-field-title]')
+const fieldContainer = document.getElementById('fieldContainer')
 let fieldArray = []   
 addFielBtn.addEventListener('click', ()=>{
     fieldTitleInput.value = ""
@@ -100,7 +101,27 @@ const getField = ()=>{
 
 getField()
 
-const fieldContainer = document.getElementById('fieldContainer')
+const removeFieldBtn = () =>{
+    for(let removeFieldBtn of document.querySelectorAll('#fieldContainer>div>button')){
+        removeFieldBtn.onclick = function (){
+                    fieldArray.map(object => {
+                        if(object.id === removeFieldBtn.getAttribute('id')){
+                            fieldArray.splice(fieldArray.indexOf(object), 1)
+                            for(let field of document.querySelectorAll('#fieldContainer>*')){
+                                if(field.getAttribute('id') === removeFieldBtn.getAttribute('id')){
+                                    field.remove()
+                                    fieldTodoTitle.textContent = ""
+                                }
+                            }
+                        }
+                    })
+                
+            
+        }
+    }
+}
+
+
 const DOMrendererFromArray = (array) =>{
     array.forEach(element=>{
         let div = document.createElement('div')
@@ -117,7 +138,7 @@ const DOMrendererFromArray = (array) =>{
     toggleActiveProperty()
     giveActiveStatusReload()
     giveFieldTodoTitleAValue()
-    
+    removeFieldBtn()
 }
 DOMrendererFromArray(fieldArray)
 
@@ -136,7 +157,7 @@ const DOMrenderer = (obj)=>{
 
     fieldContainer.appendChild(div)
     toggleActiveProperty()
- 
+    removeFieldBtn()
 }
 
 
