@@ -77,6 +77,7 @@ const toggleActiveProperty = ()=>{
                 
             })
             giveFieldTodoTitleAValue()
+    
         }
     }
 }
@@ -237,3 +238,4 @@ const todoDomRendererFromLocalStorage = (array) =>{
     })
 }
 todoDomRendererFromLocalStorage(todoArray)
+
