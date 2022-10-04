@@ -6,7 +6,14 @@ const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
 const fieldTodoTitle = document.querySelector('[data-field-title]')
 const fieldContainer = document.getElementById('fieldContainer')
-let fieldArray = []   
+
+const addTodo = document.getElementById('addTodo')
+const todoPopUp = document.getElementById('todoPopUp')
+const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
+const todoTitleInput = document.getElementById('todoTitle')
+let fieldArray = []
+//let todoArray = []
+
 addFielBtn.addEventListener('click', ()=>{
     fieldTitleInput.value = ""
     fieldPopUp.showModal()
@@ -160,4 +167,73 @@ const DOMrenderer = (obj)=>{
     removeFieldBtn()
 }
 
+addTodo.addEventListener('click', ()=>{
+    todoTitleInput.value = ""
+    todoPopUp.showModal()
+})
+addTodoPopUpBtn.addEventListener('click', ()=>{
+    addTodoToActiveField()
+    
+    todoPopUp.close()
+})
+const todoCreator = (name,id)=>{
+    let todo ={
+        name: name,
+        id: id,
+    }
+    return Object.assign(
+        {},
+        todo,
+    )
+}
+let todoArray = [] 
+const addTodoToActiveField = () =>{
+    fieldArray.map(object=>{
+        if(object.active === true){
+            todoArray.push(todoCreator(todoTitleInput.value, object.id))
+            todoDomRenderer(todoCreator(todoTitleInput.value, object.id))
+            console.log(todoArray)
+        }
+        localStorage.setItem('todos', JSON.stringify(todoArray))
+    })
+}
 
+const getTodoFromLocalStorage = () =>{
+    if(JSON.parse(localStorage.getItem('todos'))){
+        todoArray = JSON.parse(localStorage.getItem('todos'))
+    }
+}
+getTodoFromLocalStorage()
+   let todoContainer = document.querySelector('[data-todo-container]')
+const todoDomRenderer = (object)=>{
+    let todoDiv = document.createElement('div')
+    todoDiv.setAttribute('class', object.id)
+    todoDiv.innerHTML = object.name
+    let checkboxInput = document.createElement('input')
+    checkboxInput.setAttribute('type','checkbox')
+    checkboxInput.setAttribute('name','todoCheckbox')
+    
+
+    todoDiv.appendChild(checkboxInput)
+
+ 
+    todoContainer.appendChild(todoDiv)
+}
+
+const todoDomRendererFromLocalStorage = (array) =>{
+    array.forEach(object=>{
+        let todoDiv = document.createElement('div')
+        todoDiv.setAttribute('class', object.id)
+        todoDiv.innerHTML = object.name
+        let checkboxInput = document.createElement('input')
+        checkboxInput.setAttribute('type','checkbox')
+        checkboxInput.setAttribute('name','todoCheckbox')
+        
+
+        todoDiv.appendChild(checkboxInput)
+
+    
+        todoContainer.appendChild(todoDiv)
+    })
+}
+todoDomRendererFromLocalStorage(todoArray)
