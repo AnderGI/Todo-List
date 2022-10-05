@@ -76,6 +76,7 @@ const toggleActiveProperty = ()=>{
                 setFiedlToLocaleStorage()
                 
             })
+
             giveFieldTodoTitleAValue()
     
         }
@@ -181,6 +182,7 @@ const todoCreator = (name,id)=>{
     let todo ={
         name: name,
         id: id,
+      
     }
     return Object.assign(
         {},
@@ -238,4 +240,5 @@ const todoDomRendererFromLocalStorage = (array) =>{
     })
 }
 todoDomRendererFromLocalStorage(todoArray)
+
 
