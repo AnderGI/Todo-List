@@ -125,6 +125,7 @@ div[data-todo-container]>div{
 
     box-shadow: -0.25em 0.025em 0.125em 0.0625em var(--darkWhite);
 }
+
 div[data-todo-container]>div>input{
     width: 1.5em;
     height: 1.5em;

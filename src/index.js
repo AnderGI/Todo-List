@@ -59,6 +59,23 @@ const giveFieldTodoTitleAValue = () =>{
     }
 }
 
+const changeTodoDisplay = (field) =>{
+            if(document.querySelectorAll('[data-todo-container]>*')){
+                for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+                    todo.classList.remove('visible')
+                    todo.style.cssText = `
+                    display:none;
+                    `
+                    if(field.id === todo.getAttribute('class')){
+                        todo.classList.add('visible')
+                        todo.style.cssText = `
+                        display: default;
+                        `
+                    }
+                }
+            }
+        }
+
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
     for(let field of document.querySelectorAll('#fieldContainer>*')){
@@ -74,11 +91,11 @@ const toggleActiveProperty = ()=>{
                     item.active = false
                 }
                 setFiedlToLocaleStorage()
-                
+                              
             })
 
             giveFieldTodoTitleAValue()
-    
+            changeTodoDisplay(this)  
         }
     }
 }
