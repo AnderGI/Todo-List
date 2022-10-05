@@ -7,23 +7,17 @@ const fieldTitleInput = document.getElementById('fieldTitle')
 const fieldTodoTitle = document.querySelector('[data-field-title]')
 const fieldContainer = document.getElementById('fieldContainer')
 
-const addTodo = document.getElementById('addTodo')
-const todoPopUp = document.getElementById('todoPopUp')
+
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
 let fieldArray = []
-//let todoArray = []
 
-addFielBtn.addEventListener('click', ()=>{
-    fieldTitleInput.value = ""
-    fieldPopUp.showModal()
-})
 addFieldPopUpBtn.addEventListener('click', ()=>{
     addToArray(fieldCreator(fieldTitleInput.value))
     DOMrenderer(fieldCreator(fieldTitleInput.value))
     setFiedlToLocaleStorage()
     getField()
-    fieldPopUp.close()
+    fieldTitleInput.value = ""
 })
 
 const fieldCreator = (name)=>{
@@ -186,14 +180,12 @@ const DOMrenderer = (obj)=>{
     removeFieldBtn()
 }
 
-addTodo.addEventListener('click', ()=>{
-    todoTitleInput.value = ""
-    todoPopUp.showModal()
-})
+
 addTodoPopUpBtn.addEventListener('click', ()=>{
-    addTodoToActiveField()
     
-    todoPopUp.close()
+    addTodoToActiveField()
+    todoTitleInput.value = ""
+   
 })
 const todoCreator = (name,id)=>{
     let todo ={

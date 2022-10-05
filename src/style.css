@@ -38,29 +38,54 @@ header > :first-child > h1{
     font-size: 1.5rem;
 }
 
-header > :last-child{
+header > :last-child > label{
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    width: 100%;
+    flex-flow: row wrap;
     align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+
 }
-header > :last-child > button{
+header>:last-child>label>input{
+    width: 60%;
+    height: 2em;
+    padding: 1em;
+
+    font-size: 1.25rem;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.025em;
+    font-size: 600;
+
+    background-color: rgba(0,0,0,0);
+    border: none;
+    border-bottom: 2px solid var(--peach);
+}
+header>:last-child>label>input:focus{
+    border: var(--burntOrange);
+}
+header>section:last-child>label>button{
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     text-transform: lowercase;
     font-weight: 900;
 
-    font-size: 1rem;
+    font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 900;
+  
 
-    color:var(--royalBlue);
+    color:var(--peach);
     padding: 0.5em 1em;
     border-radius: 10px;
     border: 2px solid var(--darkBlue);
     background-color:rgba(0,0,0,0);
     transition: all 0.2 ease;
-
 }
-header > :last-child > button:hover{
+header>:last-child>label>button:hover{
     border: 2px solid var(--darkWhite);
     color:var(--darkWhite) ;
 }
@@ -83,7 +108,7 @@ main{
 
 #todoSection{
     display: grid;
-    grid-template-rows: 0.5fr 4fr;
+    grid-template-rows: 0.5fr 0.5fr 4fr;
     padding: 0.5em;
 }
 #todoSection>h1{
@@ -97,6 +122,56 @@ main{
     font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 900;
+}
+/*Input adder*/
+#todoSection>label{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+}
+#todoSection>label>input{
+    width: 60%;
+    height: 2em;
+    padding: 0.5em 1em;
+
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.025em;
+    font-size: 600;
+
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+#todoSection>label>input:focus{
+    border: var(--darkWhite);
+}
+#todoSection>label>button{
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: lowercase;
+    font-weight: 900;
+
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+  
+
+    color:var(--royalBlue);
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    border: 2px solid var(--darkBlue);
+    background-color:rgba(0,0,0,0);
+    transition: all 0.2 ease;
+}
+#todoSection>label>button:hover{
+    border: 2px solid var(--darkWhite);
+    color:var(--darkWhite) ;
 }
 #todoSection>div[data-todo-container]{
     display: grid;
@@ -138,9 +213,10 @@ div[data-todo-container]>div>input{
     display: flex;
     flex-flow: column wrap;
     gap: 0.5em;
+    padding: 1.5em 0.5em;
 }
 #fieldContainer>.fieldElement{
-    width: 100%;
+    width: 90%;
     padding: 0.5em 1em;
     background-color: var(--darkWhite);
     
@@ -150,6 +226,11 @@ div[data-todo-container]>div>input{
     color:var(--darkBlue);
 
     transition: all 0.2s ease;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #fieldContainer>.fieldElement:hover{
@@ -163,6 +244,26 @@ div[data-todo-container]>div>input{
     color: var(--royalBlue);
 }
 
+#fieldContainer>.fieldElement>button{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: var(--royalBlue);
+    padding: 0.5em 1em;
+      
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+    letter-spacing: 0.0125em;
+
+    transition: all 0.2s ease;
+}
+
+#fieldContainer>.fieldElement>button:hover{
+    cursor: pointer;
+    background-color: var(--burntOrange);
+    color: var(--peach);
+}
 
 
 /*AddTodo Btn*/
