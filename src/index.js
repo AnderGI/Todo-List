@@ -212,13 +212,6 @@ const addTodoToActiveField = () =>{
     })
 }
 
-const getTodoFromLocalStorage = () =>{
-    if(JSON.parse(localStorage.getItem('todos'))){
-        todoArray = JSON.parse(localStorage.getItem('todos'))
-    }
-}
-getTodoFromLocalStorage()
-
 const removeTodo = () =>{
     for(let todoBtn of document.querySelectorAll('.removeBtn')){
         todoBtn.onclick = function (){
@@ -232,6 +225,13 @@ const removeTodo = () =>{
         }
     }
 }
+const getTodoFromLocalStorage = () =>{
+    if(JSON.parse(localStorage.getItem('todos'))){
+        todoArray = JSON.parse(localStorage.getItem('todos'))
+    }
+}
+getTodoFromLocalStorage()
+
 
 
    let todoContainer = document.querySelector('[data-todo-container]')
