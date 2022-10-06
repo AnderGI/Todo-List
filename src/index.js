@@ -11,6 +11,7 @@ const fieldContainer = document.getElementById('fieldContainer')
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
 let fieldArray = []
+let todoArray = [] 
 
 addFieldPopUpBtn.addEventListener('click', ()=>{
     addToArray(fieldCreator(fieldTitleInput.value))
@@ -114,7 +115,7 @@ const getField = ()=>{
         console.log(fieldArray)
         toggleActiveProperty()
         giveActiveStatusReload()
-        giveFieldTodoTitleAValue()
+        giveFieldTodoTitleAValue() 
     }
     
 }
@@ -191,6 +192,7 @@ const todoCreator = (name,id)=>{
     let todo ={
         name: name,
         id: id,
+
       
     }
     return Object.assign(
@@ -198,7 +200,7 @@ const todoCreator = (name,id)=>{
         todo,
     )
 }
-let todoArray = [] 
+
 const addTodoToActiveField = () =>{
     fieldArray.map(object=>{
         if(object.active === true){
@@ -216,38 +218,66 @@ const getTodoFromLocalStorage = () =>{
     }
 }
 getTodoFromLocalStorage()
+
+const removeTodo = () =>{
+    for(let todoBtn of document.querySelectorAll('.removeBtn')){
+        todoBtn.onclick = function (){
+            todoArray.map(object=>{
+                   if(object.name === todoBtn.getAttribute('id')){
+                       todoArray.splice(todoArray.indexOf(object),1)
+                       console.log(todoArray)
+                       this.parentElement.remove()
+                   }
+            })
+        }
+    }
+}
+
+
    let todoContainer = document.querySelector('[data-todo-container]')
 const todoDomRenderer = (object)=>{
     let todoDiv = document.createElement('div')
     todoDiv.setAttribute('class', object.id)
-    todoDiv.innerHTML = object.name
+    let todoTitle = document.createElement('p')
+    todoTitle.innerHTML = object.name
     let checkboxInput = document.createElement('input')
     checkboxInput.setAttribute('type','checkbox')
     checkboxInput.setAttribute('name','todoCheckbox')
+    let removeBtnTodo = document.createElement('button')
+    removeBtnTodo.setAttribute('class', 'removeBtn')
+    removeBtnTodo.setAttribute('id', object.name)
+    removeBtnTodo.innerHTML = 'remove'
     
-
+    todoDiv.appendChild(todoTitle)
     todoDiv.appendChild(checkboxInput)
-
+    todoDiv.appendChild(removeBtnTodo)
  
     todoContainer.appendChild(todoDiv)
+
+    removeTodo()
 }
 
 const todoDomRendererFromLocalStorage = (array) =>{
     array.forEach(object=>{
         let todoDiv = document.createElement('div')
         todoDiv.setAttribute('class', object.id)
-        todoDiv.innerHTML = object.name
+        let todoTitle = document.createElement('p')
+        todoTitle.innerHTML = object.name
         let checkboxInput = document.createElement('input')
         checkboxInput.setAttribute('type','checkbox')
         checkboxInput.setAttribute('name','todoCheckbox')
+        let removeBtnTodo = document.createElement('button')
+        removeBtnTodo.setAttribute('class', 'removeBtn')
+        removeBtnTodo.setAttribute('id', object.name)
+        removeBtnTodo.innerHTML = 'remove'
         
-
+        todoDiv.appendChild(todoTitle)
         todoDiv.appendChild(checkboxInput)
-
-    
+        todoDiv.appendChild(removeBtnTodo)
+     
         todoContainer.appendChild(todoDiv)
     })
+    removeTodo()
 }
 todoDomRendererFromLocalStorage(todoArray)
-
 
