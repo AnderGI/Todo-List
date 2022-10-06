@@ -217,7 +217,6 @@ const removeTodo = () =>{
         todoBtn.onclick = function (){
             todoArray.map(object=>{
                    if(object.name === todoBtn.getAttribute('id')){
-                       todoArray.splice(todoArray.indexOf(object),1)
                        console.log(todoArray)
                        this.parentElement.remove()
                    }
@@ -225,6 +224,7 @@ const removeTodo = () =>{
         }
     }
 }
+
 const getTodoFromLocalStorage = () =>{
     if(JSON.parse(localStorage.getItem('todos'))){
         todoArray = JSON.parse(localStorage.getItem('todos'))
