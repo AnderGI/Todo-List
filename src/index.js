@@ -69,6 +69,7 @@ const changeTodoDisplay = (field) =>{
                     }
                 }
             }
+            
         }
 
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
@@ -92,8 +93,12 @@ const toggleActiveProperty = ()=>{
             giveFieldTodoTitleAValue()
             changeTodoDisplay(this)  
         }
+        if(field.classList.contains('active')){
+            changeTodoDisplay(field)
+        }
     }
 }
+
 const giveActiveStatusReload = ()=>{
     fieldArray.some(element =>{
         if(element.active === true){
@@ -192,7 +197,7 @@ const todoCreator = (name,id)=>{
     let todo ={
         name: name,
         id: id,
-
+        uniqueId: Date.now().toString(),
       
     }
     return Object.assign(
@@ -257,27 +262,25 @@ const todoDomRenderer = (object)=>{
     removeTodo()
 }
 
-const todoDomRendererFromLocalStorage = (array) =>{
-    array.forEach(object=>{
-        let todoDiv = document.createElement('div')
-        todoDiv.setAttribute('class', object.id)
-        let todoTitle = document.createElement('p')
-        todoTitle.innerHTML = object.name
-        let checkboxInput = document.createElement('input')
-        checkboxInput.setAttribute('type','checkbox')
-        checkboxInput.setAttribute('name','todoCheckbox')
-        let removeBtnTodo = document.createElement('button')
-        removeBtnTodo.setAttribute('class', 'removeBtn')
-        removeBtnTodo.setAttribute('id', object.name)
-        removeBtnTodo.innerHTML = 'remove'
-        
-        todoDiv.appendChild(todoTitle)
-        todoDiv.appendChild(checkboxInput)
-        todoDiv.appendChild(removeBtnTodo)
-     
-        todoContainer.appendChild(todoDiv)
-    })
-    removeTodo()
-}
-todoDomRendererFromLocalStorage(todoArray)
+const todoDomRendererFromLocalStorage = () =>{
 
+             todoArray.forEach(item=>{
+                    todoDomRenderer(item)
+
+            })
+ 
+   removeTodo()
+}
+
+todoDomRendererFromLocalStorage()
+
+const DefaultStart = () =>{
+    fieldArray = JSON.parse(localStorage.getItem('fields'))
+    fieldArray.forEach(object=> object.active = false)
+    localStorage.setItem('fields',JSON.stringify(fieldArray))
+    fieldTodoTitle.innerHTML = 'All todos'
+    for(let fields of document.querySelectorAll('#fieldContainer>*')){
+        fields.classList.remove('active')
+    }
+  }
+  DefaultStart()
