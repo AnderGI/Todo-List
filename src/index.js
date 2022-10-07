@@ -1,4 +1,4 @@
-import { remove, set } from 'lodash';
+import { indexOf, remove, set } from 'lodash';
 import './style.css';
 const addFielBtn = document.getElementById('addField')
 const fieldPopUp = document.getElementById('fieldPopUp')
@@ -217,19 +217,6 @@ const addTodoToActiveField = () =>{
     })
 }
 
-const removeTodo = () =>{
-    for(let todoBtn of document.querySelectorAll('.removeBtn')){
-        todoBtn.onclick = function (){
-            todoArray.map(object=>{
-                   if(object.name === todoBtn.getAttribute('id')){
-                       console.log(todoArray)
-                       this.parentElement.remove()
-                   }
-            })
-        }
-    }
-}
-
 const getTodoFromLocalStorage = () =>{
     if(JSON.parse(localStorage.getItem('todos'))){
         todoArray = JSON.parse(localStorage.getItem('todos'))
@@ -259,7 +246,7 @@ const todoDomRenderer = (object)=>{
  
     todoContainer.appendChild(todoDiv)
 
-    removeTodo()
+   // removeTodo()
 }
 
 const todoDomRendererFromLocalStorage = () =>{
@@ -269,18 +256,16 @@ const todoDomRendererFromLocalStorage = () =>{
 
             })
  
-   removeTodo()
+   //removeTodo()
 }
 
 todoDomRendererFromLocalStorage()
 
 const DefaultStart = () =>{
-    fieldArray = JSON.parse(localStorage.getItem('fields'))
-    fieldArray.forEach(object=> object.active = false)
-    localStorage.setItem('fields',JSON.stringify(fieldArray))
     fieldTodoTitle.innerHTML = 'All todos'
     for(let fields of document.querySelectorAll('#fieldContainer>*')){
         fields.classList.remove('active')
     }
   }
   DefaultStart()
+  
