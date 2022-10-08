@@ -285,3 +285,19 @@ const removeBtn = () =>{
     }
 }
 removeBtn()
+
+const checkTodo = () =>{
+    for(let checkbox of document.querySelectorAll('[data-todo-container]>*>input[type="checkbox"]')){
+        checkbox.onclick = (e) =>{
+            let inputCheckbox = e.target
+            if(inputCheckbox.checked){
+               console.log(inputCheckbox)
+               inputCheckbox.parentNode.style.cssText = `
+               text-decoration: line-through;
+               `
+            }
+        }
+    }
+}
+
+checkTodo()
