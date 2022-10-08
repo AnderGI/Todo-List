@@ -193,6 +193,11 @@ div[data-todo-container]>div{
     border-radius: 10px;
 
     box-shadow: -0.25em 0.025em 0.125em 0.0625em var(--darkWhite);
+
+    text-decoration: none;
+}
+div[data-todo-container]>div.checked{
+    text-decoration: line-through;
 }
 div[data-todo-container]>div>p{
     color: var(--darkWhite);

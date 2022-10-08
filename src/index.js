@@ -291,24 +291,17 @@ const checkTodo = () =>{
     for(let checkbox of document.querySelectorAll('[data-todo-container]>*>input[type="checkbox"]')){
         checkbox.onclick = (e) =>{
             let inputCheckbox = e.target
-            if(inputCheckbox.checked){
-               inputCheckbox.parentNode.style.cssText = `
-               text-decoration: line-through;
-               `    
-            }else{
-                inputCheckbox.parentNode.style.cssText = `
-                text-decoration: none;
-                `
-            } 
             todoArray = JSON.parse(localStorage.getItem('todos'))
             todoArray.forEach(object=>{
                 if(inputCheckbox.checked){
                     if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
                         object.checked = true
+                        inputCheckbox.parentNode.classList.add('checked')
                     }
                  }else{
                     if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
                         object.checked = false
+                        inputCheckbox.parentNode.classList.remove('checked')
                     }
                  }
             })
@@ -319,6 +312,16 @@ const checkTodo = () =>{
 
 checkTodo()
 
-const setCheckedValueFromLocalStorage = () =>{
-    
+const maintainCheckProperty = () =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.find(object=>{
+        if(object.checked === true){
+            for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+                if(object.uniqueId === todo.getAttribute('id')){
+                    todo.classList.add('checked')
+                }
+            }
+        }
+    })
 }
+maintainCheckProperty()
