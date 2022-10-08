@@ -277,6 +277,7 @@ const removeBtn = () =>{
             todoArray.forEach(object=>{
                 if(object.uniqueId === btn.getAttribute('class')){
                     todoArray.splice(todoArray.indexOf(object),1)
+                    btn.parentNode.remove()
                 }
             })
             localStorage.setItem('todos', JSON.stringify(todoArray))
