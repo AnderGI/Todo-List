@@ -198,6 +198,7 @@ const todoCreator = (name,id)=>{
         name: name,
         id: id,
         uniqueId: Date.now().toString(),
+        checked: false,
       
     }
     return Object.assign(
@@ -291,13 +292,33 @@ const checkTodo = () =>{
         checkbox.onclick = (e) =>{
             let inputCheckbox = e.target
             if(inputCheckbox.checked){
-               console.log(inputCheckbox)
                inputCheckbox.parentNode.style.cssText = `
                text-decoration: line-through;
-               `
-            }
+               `    
+            }else{
+                inputCheckbox.parentNode.style.cssText = `
+                text-decoration: none;
+                `
+            } 
+            todoArray = JSON.parse(localStorage.getItem('todos'))
+            todoArray.forEach(object=>{
+                if(inputCheckbox.checked){
+                    if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
+                        object.checked = true
+                    }
+                 }else{
+                    if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
+                        object.checked = false
+                    }
+                 }
+            })
+            localStorage.setItem('todos', JSON.stringify(todoArray))
         }
     }
 }
 
 checkTodo()
+
+const setCheckedValueFromLocalStorage = () =>{
+    
+}
