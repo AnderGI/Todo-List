@@ -319,9 +319,11 @@ const maintainCheckProperty = () =>{
             for(let todo of document.querySelectorAll('[data-todo-container]>*')){
                 if(object.uniqueId === todo.getAttribute('id')){
                     todo.classList.add('checked')
+                    todo.querySelector('input[type="checkbox"]').checked = true
                 }
             }
         }
     })
+    localStorage.setItem('todos', JSON.stringify(todoArray))
 }
 maintainCheckProperty()
