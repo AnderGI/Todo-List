@@ -1,4 +1,4 @@
-import { indexOf, remove, set } from 'lodash';
+import { indexOf, remove, set, uniqueId } from 'lodash';
 import './style.css';
 const addFielBtn = document.getElementById('addField')
 const fieldPopUp = document.getElementById('fieldPopUp')
@@ -230,14 +230,14 @@ getTodoFromLocalStorage()
 const todoDomRenderer = (object)=>{
     let todoDiv = document.createElement('div')
     todoDiv.setAttribute('class', object.id)
+    todoDiv.setAttribute('id',object.uniqueId)
     let todoTitle = document.createElement('p')
     todoTitle.innerHTML = object.name
     let checkboxInput = document.createElement('input')
     checkboxInput.setAttribute('type','checkbox')
     checkboxInput.setAttribute('name','todoCheckbox')
     let removeBtnTodo = document.createElement('button')
-    removeBtnTodo.setAttribute('class', 'removeBtn')
-    removeBtnTodo.setAttribute('id', object.name)
+    removeBtnTodo.setAttribute('class', object.uniqueId)
     removeBtnTodo.innerHTML = 'remove'
     
     todoDiv.appendChild(todoTitle)
@@ -269,3 +269,18 @@ const DefaultStart = () =>{
   }
   DefaultStart()
   
+const removeBtn = () =>{
+    for(let removeBtn of document.querySelectorAll('[data-todo-container]>*>button')){
+        removeBtn.onclick = (e) =>{
+            let btn = e.target
+            todoArray = JSON.parse(localStorage.getItem('todos'))
+            todoArray.forEach(object=>{
+                if(object.uniqueId === btn.getAttribute('class')){
+                    todoArray.splice(todoArray.indexOf(object),1)
+                }
+            })
+            localStorage.setItem('todos', JSON.stringify(todoArray))
+        }
+    }
+}
+removeBtn()
