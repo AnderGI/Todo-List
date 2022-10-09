@@ -198,6 +198,8 @@ div[data-todo-container]>div{
 }
 div[data-todo-container]>div[data-checked = 'true']{
     text-decoration: line-through;
+    text-decoration-color: var(--burntOrange);
+    text-decoration-thickness: 0.25em;
 }
 div[data-todo-container]>div>p{
     color: var(--darkWhite);
@@ -213,7 +215,28 @@ div[data-todo-container]>div>input{
     width: 1.5em;
     height: 1.5em;
 }
+div[data-todo-container]>div>button{
+border: none;
+background-color: rgba(0,0,0,0);
+color: var(--darkWhite);
+padding: 0.5em 1em;
+  
+font-size: 0.75rem;
+font-weight: 800;
+font-family: Arial, Helvetica, sans-serif;
+text-transform: lowercase;
+letter-spacing: 0.0125em;
 
+
+transition: all 0.2s ease;
+}
+
+div[data-todo-container]>div>button:hover{
+cursor: pointer;
+background-color: var(--burntOrange);
+color: var(--peach);
+
+}
 
 
 /*DIV FIELD SECTION*/
