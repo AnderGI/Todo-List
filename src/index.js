@@ -1,7 +1,5 @@
 import { indexOf, remove, set, uniqueId } from 'lodash';
 import './style.css';
-const addFielBtn = document.getElementById('addField')
-const fieldPopUp = document.getElementById('fieldPopUp')
 const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
 const fieldTodoTitle = document.querySelector('[data-field-title]')
@@ -117,7 +115,6 @@ const giveActiveStatusReload = ()=>{
 const getField = ()=>{
     if(JSON.parse(localStorage.getItem('fields'))){
         fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
-        console.log(fieldArray)
         toggleActiveProperty()
         giveActiveStatusReload()
         giveFieldTodoTitleAValue() 
@@ -212,7 +209,6 @@ const addTodoToActiveField = () =>{
         if(object.active === true){
             todoArray.push(todoCreator(todoTitleInput.value, object.id))
             todoDomRenderer(todoCreator(todoTitleInput.value, object.id))
-            console.log(todoArray)
         }
         localStorage.setItem('todos', JSON.stringify(todoArray))
     })
@@ -232,6 +228,7 @@ const todoDomRenderer = (object)=>{
     let todoDiv = document.createElement('div')
     todoDiv.setAttribute('class', object.id)
     todoDiv.setAttribute('id',object.uniqueId)
+    todoDiv.setAttribute('data-checked', object.checked)
     let todoTitle = document.createElement('p')
     todoTitle.innerHTML = object.name
     let checkboxInput = document.createElement('input')
@@ -296,12 +293,12 @@ const checkTodo = () =>{
                 if(inputCheckbox.checked){
                     if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
                         object.checked = true
-                        inputCheckbox.parentNode.classList.add('checked')
+                        inputCheckbox.parentNode.setAttribute('data-checked', true)
                     }
                  }else{
                     if(inputCheckbox.parentNode.getAttribute('id') === object.uniqueId){
                         object.checked = false
-                        inputCheckbox.parentNode.classList.remove('checked')
+                        inputCheckbox.parentNode.removeAttribute('data-checked')
                     }
                  }
             })
@@ -313,17 +310,14 @@ const checkTodo = () =>{
 checkTodo()
 
 const maintainCheckProperty = () =>{
-    todoArray = JSON.parse(localStorage.getItem('todos'))
-    todoArray.find(object=>{
-        if(object.checked === true){
-            for(let todo of document.querySelectorAll('[data-todo-container]>*')){
-                if(object.uniqueId === todo.getAttribute('id')){
-                    todo.classList.add('checked')
-                    todo.querySelector('input[type="checkbox"]').checked = true
-                }
-            }
+   
+    for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+        if(todo.getAttribute('data-checked') === "true"){
+            todo.querySelector('input').checked = true
+        }else{
+            todo.querySelector('input').checked = false
         }
-    })
-    localStorage.setItem('todos', JSON.stringify(todoArray))
+    }
 }
+
 maintainCheckProperty()
