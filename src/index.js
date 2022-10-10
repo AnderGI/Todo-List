@@ -125,6 +125,7 @@ const getField = ()=>{
 getField()
 
 const removeFieldBtn = () =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
     for(let removeFieldBtn of document.querySelectorAll('#fieldContainer>div>button')){
         removeFieldBtn.onclick = function (){
                     fieldArray.map(object => {
@@ -135,6 +136,18 @@ const removeFieldBtn = () =>{
                                     field.remove()
                                     fieldTodoTitle.textContent = ""
                                 }
+                                todoArray.forEach(object => {
+                                    if(object.id === this.getAttribute('id')){
+                                        todoArray.splice(todoArray.indexOf(object), 1)
+                                    
+                                        for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+                                            if(todo.getAttribute('id')=== object.uniqueId){
+                                                todo.remove()
+                                            }
+                                        }
+                                        localStorage.setItem('todos', JSON.stringify(todoArray))
+                                    }
+                                })
                             }
                         }
                     })
@@ -142,6 +155,7 @@ const removeFieldBtn = () =>{
             
         }
     }
+
 }
 
 
@@ -321,3 +335,5 @@ const maintainCheckProperty = () =>{
 }
 
 maintainCheckProperty()
+
+// when a field is eliminated the todos that are related to that field shoeld be eliminated, id
