@@ -313,12 +313,22 @@ button#addTodo{
 */
 /*Dialog*/
 
-dialog#popUp{
+dialog#todoDialog{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+dialog#todoDialog>form{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+    padding: 0.5em 0.75em;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 

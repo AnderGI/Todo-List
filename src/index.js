@@ -4,7 +4,9 @@ const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
 const fieldTodoTitle = document.querySelector('[data-field-title]')
 const fieldContainer = document.getElementById('fieldContainer')
-
+const todoDialog = document.getElementById('todoDialog')
+const todoDialogBtn = document.getElementById('todoDialogBtn')
+const todoPriority = document.getElementById('todoPriority')
 
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
@@ -135,13 +137,13 @@ const removeFieldBtn = () =>{
                                 if(field.getAttribute('id') === removeFieldBtn.getAttribute('id')){
                                     field.remove()
                                     fieldTodoTitle.textContent = ""
-                                }
-                                todoArray.forEach(object => {
-                                    if(object.id === this.getAttribute('id')){
-                                        todoArray.splice(todoArray.indexOf(object), 1)
+                                } // se podria hacer un remove del parent??? En vez de hacer el loop
+                                todoArray.forEach(obj => {
+                                    if(obj.id === this.getAttribute('id')){
+                                        todoArray.splice(todoArray.indexOf(obj), 1)
                                     
                                         for(let todo of document.querySelectorAll('[data-todo-container]>*')){
-                                            if(todo.getAttribute('id')=== object.uniqueId){
+                                            if(todo.getAttribute('id') === obj.uniqueId){
                                                 todo.remove()
                                             }
                                         }
@@ -210,6 +212,7 @@ const todoCreator = (name,id)=>{
         id: id,
         uniqueId: Date.now().toString(),
         checked: false,
+        priority: none,
       
     }
     return Object.assign(
@@ -336,4 +339,30 @@ const maintainCheckProperty = () =>{
 
 maintainCheckProperty()
 
-// when a field is eliminated the todos that are related to that field shoeld be eliminated, id
+const todoDialogShower = () =>{
+    for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+        todo.onclick = () =>{
+            todoDialog.showModal()
+            todoDialogCloser(todo)
+        }
+    }
+}
+todoDialogShower()
+
+const todoDialogCloser = (el) => {
+    todoDialogBtn.onclick = () =>{
+        todoDialog.close()
+        passPriorityValueFromDialogToTodo(el)
+    }
+}
+
+
+const passPriorityValueFromDialogToTodo = (element) =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.forEach(object=>{
+        if(object.uniqueId === element.getAttribute('id')){
+            object.priority = todoPriority.value
+        }
+    })
+    localStorage.setItem('todos', JSON.stringify(todoArray))
+}
