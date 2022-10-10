@@ -212,7 +212,7 @@ const todoCreator = (name,id)=>{
         id: id,
         uniqueId: Date.now().toString(),
         checked: false,
-        priority: none,
+        priority: "none",
       
     }
     return Object.assign(
@@ -222,10 +222,15 @@ const todoCreator = (name,id)=>{
 }
 
 const addTodoToActiveField = () =>{
-    fieldArray.map(object=>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    fieldArray.forEach(object=>{
         if(object.active === true){
-            todoArray.push(todoCreator(todoTitleInput.value, object.id))
-            todoDomRenderer(todoCreator(todoTitleInput.value, object.id))
+            
+                todoArray.push(todoCreator(todoTitleInput.value, object.id))
+                console.log(todoArray)
+                todoDomRenderer(todoCreator(todoTitleInput.value, object.id))
+            
+            
         }
         localStorage.setItem('todos', JSON.stringify(todoArray))
     })
@@ -246,17 +251,24 @@ const todoDomRenderer = (object)=>{
     todoDiv.setAttribute('class', object.id)
     todoDiv.setAttribute('id',object.uniqueId)
     todoDiv.setAttribute('data-checked', object.checked)
+
     let todoTitle = document.createElement('p')
     todoTitle.innerHTML = object.name
+    
     let checkboxInput = document.createElement('input')
     checkboxInput.setAttribute('type','checkbox')
     checkboxInput.setAttribute('name','todoCheckbox')
+    
+    let displayInfoBtn = document.createElement('button')
+    displayInfoBtn.innerHTML = 'display Todo info'
+
     let removeBtnTodo = document.createElement('button')
     removeBtnTodo.setAttribute('class', object.uniqueId)
     removeBtnTodo.innerHTML = 'remove'
     
     todoDiv.appendChild(todoTitle)
     todoDiv.appendChild(checkboxInput)
+    todoDiv.appendChild(displayInfoBtn)
     todoDiv.appendChild(removeBtnTodo)
  
     todoContainer.appendChild(todoDiv)
@@ -265,11 +277,13 @@ const todoDomRenderer = (object)=>{
 }
 
 const todoDomRendererFromLocalStorage = () =>{
+    if(JSON.parse(localStorage.getItem('todos'))){
+        todoArray.forEach(item=>{
+            todoDomRenderer(item)
 
-             todoArray.forEach(item=>{
-                    todoDomRenderer(item)
-
-            })
+    })
+    }
+            
  
    //removeTodo()
 }
@@ -366,3 +380,4 @@ const passPriorityValueFromDialogToTodo = (element) =>{
     })
     localStorage.setItem('todos', JSON.stringify(todoArray))
 }
+
