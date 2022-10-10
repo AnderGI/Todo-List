@@ -7,6 +7,7 @@ const fieldContainer = document.getElementById('fieldContainer')
 const todoDialog = document.getElementById('todoDialog')
 const todoDialogBtn = document.getElementById('todoDialogBtn')
 const todoPriority = document.getElementById('todoPriority')
+const todoDescription = document.getElementById('todoDescription')
 
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
@@ -213,6 +214,7 @@ const todoCreator = (name,id)=>{
         uniqueId: Date.now().toString(),
         checked: false,
         priority: "none",
+        description: "none",
       
     }
     return Object.assign(
@@ -377,6 +379,7 @@ const passPriorityValueFromDialogToTodo = (element) =>{
     todoArray.forEach(object=>{
         if(object.uniqueId === element.parentNode.getAttribute('id')){
             object.priority = todoPriority.value
+            object.description = todoDescription.value
         }
     })
     localStorage.setItem('todos', JSON.stringify(todoArray))
