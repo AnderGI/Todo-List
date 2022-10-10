@@ -259,8 +259,9 @@ const todoDomRenderer = (object)=>{
     checkboxInput.setAttribute('type','checkbox')
     checkboxInput.setAttribute('name','todoCheckbox')
     
-    let displayInfoBtn = document.createElement('button')
-    displayInfoBtn.innerHTML = 'display Todo info'
+    let addInfoBtn = document.createElement('button')
+    addInfoBtn.innerHTML = 'add Todo info'
+    addInfoBtn.setAttribute('class','addTodoInfoBtn')
 
     let removeBtnTodo = document.createElement('button')
     removeBtnTodo.setAttribute('class', object.uniqueId)
@@ -268,7 +269,7 @@ const todoDomRenderer = (object)=>{
     
     todoDiv.appendChild(todoTitle)
     todoDiv.appendChild(checkboxInput)
-    todoDiv.appendChild(displayInfoBtn)
+    todoDiv.appendChild(addInfoBtn)
     todoDiv.appendChild(removeBtnTodo)
  
     todoContainer.appendChild(todoDiv)
@@ -354,10 +355,10 @@ const maintainCheckProperty = () =>{
 maintainCheckProperty()
 
 const todoDialogShower = () =>{
-    for(let todo of document.querySelectorAll('[data-todo-container]>*')){
-        todo.onclick = () =>{
+    for(let addInfoBtn of document.querySelectorAll('.addTodoInfoBtn')){
+        addInfoBtn.onclick = () =>{
             todoDialog.showModal()
-            todoDialogCloser(todo)
+            todoDialogCloser(addInfoBtn)
         }
     }
 }
@@ -374,7 +375,7 @@ const todoDialogCloser = (el) => {
 const passPriorityValueFromDialogToTodo = (element) =>{
     todoArray = JSON.parse(localStorage.getItem('todos'))
     todoArray.forEach(object=>{
-        if(object.uniqueId === element.getAttribute('id')){
+        if(object.uniqueId === element.parentNode.getAttribute('id')){
             object.priority = todoPriority.value
         }
     })
