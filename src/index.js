@@ -8,6 +8,8 @@ const todoDialog = document.getElementById('todoDialog')
 const todoDialogBtn = document.getElementById('todoDialogBtn')
 const todoPriority = document.getElementById('todoPriority')
 const todoDescription = document.getElementById('todoDescription')
+const addTodoInfoDialog = document.getElementById('showTodoInfo')
+const closeTodoInfoDialog = document.querySelector('button[data-closeInfoDialog]')
 
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
@@ -262,8 +264,12 @@ const todoDomRenderer = (object)=>{
     checkboxInput.setAttribute('name','todoCheckbox')
     
     let addInfoBtn = document.createElement('button')
-    addInfoBtn.innerHTML = 'add Todo info'
+    addInfoBtn.innerHTML = 'add info'
     addInfoBtn.setAttribute('class','addTodoInfoBtn')
+
+    let showInfoBtn = document.createElement('button')
+    showInfoBtn.innerHTML = 'show info'
+    showInfoBtn.setAttribute('class','showTodoInfoBtn')
 
     let removeBtnTodo = document.createElement('button')
     removeBtnTodo.setAttribute('class', object.uniqueId)
@@ -271,6 +277,7 @@ const todoDomRenderer = (object)=>{
     
     todoDiv.appendChild(todoTitle)
     todoDiv.appendChild(checkboxInput)
+    todoDiv.appendChild(showInfoBtn)
     todoDiv.appendChild(addInfoBtn)
     todoDiv.appendChild(removeBtnTodo)
  
@@ -385,3 +392,37 @@ const passPriorityValueFromDialogToTodo = (element) =>{
     localStorage.setItem('todos', JSON.stringify(todoArray))
 }
 
+const showTodoInfoDialog = () =>{
+    for(let showTodoInfoBtn of document.querySelectorAll('.showTodoInfoBtn')){
+        showTodoInfoBtn.onclick = () =>{
+            addTodoInfoDialog.showModal()
+            todoInfoDialogCloser(showTodoInfoBtn)
+        }
+    }
+}
+
+showTodoInfoDialog()
+
+const todoInfoDialogCloser = (el) =>{
+    closeTodoInfoDialog.onclick = () =>{
+        addTodoInfoDialog.close()
+        addInfoFromTodoToDialog(el)
+    }
+}
+
+const addInfoFromTodoToDialog = (btn) =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.forEach(object=>{
+        if(object.uniqueId === btn.parentNode.getAttribute('id')){
+            if(object.priority !== "none" && object.description !== "none"){
+                document.querySelector('[data-todo-priority]').innerHTML = object.priority //p
+                document.querySelector('[data-todo-description]').innerHTML = object.description //p
+            }else{
+                document.querySelector('[data-todo-priority]').innerHTML = "No priority has been added" //p
+                document.querySelector('[data-todo-description]').innerHTML = "No description has been added" //p                
+            }
+            
+        }
+    })
+    todoArray = localStorage.setItem('todos', JSON.stringify(todoArray))
+}

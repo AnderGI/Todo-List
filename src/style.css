@@ -313,7 +313,7 @@ button#addTodo{
 */
 /*Dialog*/
 
-dialog#todoDialog{
+dialog#todoDialog, dialog#showTodoInfo{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -327,6 +327,13 @@ dialog#todoDialog>form{
     align-items: center;
     gap: 0.75em;
     padding: 0.5em 0.75em;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+dialog#showTodoInfo{
+    padding: 0.5em 0.75em;
+    gap: 0.75em;
 
     font-family: Arial, Helvetica, sans-serif;
 }
