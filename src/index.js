@@ -435,16 +435,24 @@ const renderColorToTodoDependignOnPriority = () =>{
             if(todo.getAttribute('id') === object.uniqueId){
                 switch(object.priority){
                     case "It Can Wait":
-                        console.log(todo + " has It Can Wait priority")
+                        todo.style.cssText = `
+                        box-shadow: -0.25em 0.025em 0.125em 0.0625em green;
+                        `
                         break;
                     case "Do Not Procastinate":
-                        console.log(todo + " has Don Not Procastinate priority")
+                        todo.style.cssText = `
+                        box-shadow: -0.25em 0.025em 0.125em 0.0625em yellow;
+                        `                       
                         break;
                     case "Hurry Up!":
-                        console.log(odot + " has Hurry Up! priority")
+                        todo.style.cssText = `
+                        box-shadow: -0.25em 0.025em 0.125em 0.0625em red;
+                        `
                         break;
                     default:
-                        console.log(todo + " has none priority")
+                        todo.style.cssText = `
+                        box-shadow: -0.25em 0.025em 0.125em 0.0625em snow;
+                        `
                 }
             }
         }
