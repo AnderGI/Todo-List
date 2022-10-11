@@ -396,36 +396,35 @@ const passPriorityValueFromDialogToTodo = (element) =>{
 }
 
 const showTodoInfoDialog = () =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
     for(let showTodoInfoBtn of document.querySelectorAll('.showTodoInfoBtn')){
         showTodoInfoBtn.onclick = () =>{
             addTodoInfoDialog.showModal()
-            todoInfoDialogCloser(showTodoInfoBtn)
+            todoArray.forEach(object => {
+                if(object.uniqueId === showTodoInfoBtn.parentNode.getAttribute('id')){
+                    if(object.priority !== "none" && object.description !== "none"){
+                        document.querySelector('[data-todo-priority]').innerHTML = object.priority
+                        document.querySelector('[data-todo-description]').innerHTML = object.description
+                    }else{
+                        document.querySelector('[data-todo-priority]').innerHTML = "No priority has been added"
+                        document.querySelector('[data-todo-description]').innerHTML = "No description has been added"
+                    }
+
+                }
+            })
         }
     }
+    localStorage.setItem('todos', JSON.stringify(todoArray))
 }
 
 showTodoInfoDialog()
 
 const todoInfoDialogCloser = (el) =>{
-    closeTodoInfoDialog.onclick = () =>{
-        addTodoInfoDialog.close()
-        addInfoFromTodoToDialog(el)
-    }
-}
 
-const addInfoFromTodoToDialog = (btn) =>{
-    todoArray = JSON.parse(localStorage.getItem('todos'))
-    todoArray.forEach(object=>{
-        if(object.uniqueId === btn.parentNode.getAttribute('id')){
-            if(object.priority !== "none" && object.description !== "none"){
-                document.querySelector('[data-todo-priority]').innerHTML = object.priority //p
-                document.querySelector('[data-todo-description]').innerHTML = object.description //p
-            }else{
-                document.querySelector('[data-todo-priority]').innerHTML = "No priority has been added" //p
-                document.querySelector('[data-todo-description]').innerHTML = "No description has been added" //p                
-            }
-            
-        }
-    })
-    todoArray = localStorage.setItem('todos', JSON.stringify(todoArray))
+    closeTodoInfoDialog.onclick = () =>{
+        addTodoInfoDialog.close()  
+       
+    } 
 }
+todoInfoDialogCloser()
+
