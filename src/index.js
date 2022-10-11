@@ -38,6 +38,7 @@ const fieldCreator = (name)=>{
 
 const addToArray = (obj) => {
     fieldArray.push(obj)
+    localStorage.setItem('fields', JSON.stringify(fieldArray))
 }
 
 const setFiedlToLocaleStorage = ()=>{
@@ -77,6 +78,7 @@ const changeTodoDisplay = (field) =>{
 
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
+    fieldArray = JSON.parse(localStorage.getItem('fields')) || []
     for(let field of document.querySelectorAll('#fieldContainer>*')){
         field.onclick = function(){
             for(let field of document.querySelectorAll('#fieldContainer>*')){
@@ -100,7 +102,9 @@ const toggleActiveProperty = ()=>{
             changeTodoDisplay(field)
         }
     }
+    localStorage.setItem('fields', JSON.stringify(fieldArray))
 }
+
 
 const giveActiveStatusReload = ()=>{
     fieldArray.some(element =>{
@@ -130,6 +134,19 @@ const getField = ()=>{
 getField()
 
 const removeFieldBtn = () =>{
+    fieldArray = JSON.parse(localStorage.getItem('fields'))
+    for(let removeFieldBtn of document.querySelectorAll('#fieldContainer>div>button')){
+        removeFieldBtn.onclick = () => {
+            fieldArray.forEach(field => {
+                if(field.id === removeFieldBtn.parentNode.getAttribute('id')){
+                    fieldArray.splice(fieldArray.indexOf(field), 1)
+                    removeFieldBtn.parentNode.remove()
+                }
+            })
+        }
+    }
+    localStorage.setItem('fields', JSON.stringify(fieldArray))
+    /*
     todoArray = JSON.parse(localStorage.getItem('todos'))
     for(let removeFieldBtn of document.querySelectorAll('#fieldContainer>div>button')){
         removeFieldBtn.onclick = function (){
@@ -159,7 +176,7 @@ const removeFieldBtn = () =>{
                 
             
         }
-    }
+    }*/
 
 }
 
@@ -226,7 +243,8 @@ const todoCreator = (name,id)=>{
 }
 
 const addTodoToActiveField = () =>{
-    todoArray = JSON.parse(localStorage.getItem('todos'))
+    fieldArray = JSON.parse(localStorage.getItem('fields'))
+    todoArray = JSON.parse(localStorage.getItem('todos')) || []
     fieldArray.forEach(object=>{
         if(object.active === true){
             
@@ -238,6 +256,7 @@ const addTodoToActiveField = () =>{
         }
         localStorage.setItem('todos', JSON.stringify(todoArray))
     })
+    localStorage.setItem('fields', JSON.stringify(fieldArray))
 }
 
 const getTodoFromLocalStorage = () =>{
