@@ -143,6 +143,18 @@ const removeFieldBtn = () =>{
                     removeFieldBtn.parentNode.remove()
                     fieldTodoTitle.textContent = ""
                 }
+                todoArray = JSON.parse(localStorage.getItem('todos'))
+                todoArray.forEach(todoObj=>{
+                    if(todoObj.id === removeFieldBtn.getAttribute('id')){
+                        todoArray.splice(todoArray.indexOf(todoObj), 1)
+                        for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+                            if(todo.getAttribute('id') === todoObj.uniqueId){
+                                todo.remove()
+                            }
+                        }
+                    }
+                })
+                localStorage.setItem('todos', JSON.stringify(todoArray))
             })
         }
         localStorage.setItem('fields', JSON.stringify(fieldArray))
@@ -151,20 +163,6 @@ const removeFieldBtn = () =>{
 }
 removeFieldBtn()
 
-const removeTodoAfterRemovingField = (btn) =>{
-    todoArray = JSON.parse(localStorage.getItem('todos'))
-    todoArray.forEach(todoObj=>{
-        if(todoObj.id === btn.parentNode.getAttribute('id')){
-            todoArray.splice(todoArray.indexOf(todoObj), 1)
-            for(let todo of document.querySelectorAll('[data-todo-container]>*')){
-                if(todo.getAttribute('id') === todoObj.uniqueId){
-                    todo.remove()
-                }
-            }
-        }
-    })
-    localStorage.setItem('todos', JSON.stringify(todoArray))
-}
 
 
 const DOMrendererFromArray = (array) =>{
@@ -183,7 +181,7 @@ const DOMrendererFromArray = (array) =>{
     toggleActiveProperty()
     giveActiveStatusReload()
     giveFieldTodoTitleAValue()
-   // removeFieldBtn()
+   removeFieldBtn()
 }
 DOMrendererFromArray(fieldArray)
 
