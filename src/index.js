@@ -428,3 +428,27 @@ const todoInfoDialogCloser = (el) =>{
 }
 todoInfoDialogCloser()
 
+const renderColorToTodoDependignOnPriority = () =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.forEach(object =>{
+        for(let todo of document.querySelectorAll('[data-todo-container]>*')){
+            if(todo.getAttribute('id') === object.uniqueId){
+                switch(object.priority){
+                    case "It Can Wait":
+                        console.log(todo + " has It Can Wait priority")
+                        break;
+                    case "Do Not Procastinate":
+                        console.log(todo + " has Don Not Procastinate priority")
+                        break;
+                    case "Hurry Up!":
+                        console.log(odot + " has Hurry Up! priority")
+                        break;
+                    default:
+                        console.log(todo + " has none priority")
+                }
+            }
+        }
+    })
+    localStorage.setItem('todos', JSON.stringify(todoArray))
+}
+renderColorToTodoDependignOnPriority()
