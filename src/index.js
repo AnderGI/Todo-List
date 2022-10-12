@@ -22,6 +22,10 @@ let fieldArray = []
 let todoArray = [] 
 
 addFieldPopUpBtn.addEventListener('click', ()=>{
+    /**
+     * when clicked on the add field btn it should create a field object, add it to array, render it to the dom, save it on lacal storage
+     * and retreive taht array everytime to change new features
+     */
     addToArray(fieldCreator(fieldTitleInput.value))
     DOMrenderer(fieldCreator(fieldTitleInput.value))
     setFiedlToLocaleStorage()
@@ -51,9 +55,10 @@ const setFiedlToLocaleStorage = ()=>{
     localStorage.setItem('fields', field)
 }
 
-//Once a div is active the name of thje object associated to it shold 
-//should appear in the field title text
+
 const giveFieldTodoTitleAValue = () =>{
+    //Once a div is active the name of the object (field) associated to it
+    //should appear in the field title text
     for(let field of document.querySelectorAll('#fieldContainer>*')){
         fieldArray.some(object=>{
             if(field.classList.contains('active') && field.getAttribute('id') === object.id){
@@ -64,6 +69,10 @@ const giveFieldTodoTitleAValue = () =>{
 }
 
 const changeTodoDisplay = (field) =>{
+    /**
+     * this function will add default or none display depending if the field has an active classlist
+     * ,a.k.a, is active
+     */
             if(document.querySelectorAll('[data-todo-container]>*')){
                 for(let todo of document.querySelectorAll('[data-todo-container]>*')){
                     todo.classList.remove('visible')
@@ -81,12 +90,15 @@ const changeTodoDisplay = (field) =>{
             
         }
 
+
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
     fieldArray = JSON.parse(localStorage.getItem('fields')) || []
+    //if no field has active class it should not be able to add fields
     addTodoLabel.style.cssText = `
     display: none;
     `
+    //change the grid layout if it has no add field input
     todoSection.style.cssText = `
     display: grid;
     grid-template-rows: 0.5fr 4fr;
@@ -94,6 +106,8 @@ const toggleActiveProperty = ()=>{
     `
     for(let field of document.querySelectorAll('#fieldContainer>*')){
         field.onclick = function(){
+            //everytime a field is clicked the layout of the todosection should change 
+            // and the add todo input should be visible (display default)
             todoSection.style.cssText = `
             display: grid;
             grid-template-rows: 0.5fr 0.5fr 4fr;
@@ -102,9 +116,14 @@ const toggleActiveProperty = ()=>{
             addTodoLabel.style.cssText = `
             display: default;
             `
+            /**
+             * everytime a fied is clicked active class should only be on that field. Hence, every
+             * other one should have its class active remove
+             */
             for(let field of document.querySelectorAll('#fieldContainer>*')){
                 field.classList.remove('active')
             }
+            //change the info of the todo array from localstorage
             fieldArray.forEach(item=>{
                 if(this.getAttribute('id') === item.id){
                     item.active = true
@@ -117,7 +136,7 @@ const toggleActiveProperty = ()=>{
             })
 
             giveFieldTodoTitleAValue()
-            changeTodoDisplay(this)  
+            changeTodoDisplay(this)  //all the todos related with the field will be only visible (display default)
         }
         if(field.classList.contains('active')){
             changeTodoDisplay(field)
@@ -128,6 +147,10 @@ const toggleActiveProperty = ()=>{
 
 
 const giveActiveStatusReload = ()=>{
+    /**
+     * this funciton will make sure everytime the page is reloaded that the active class
+     * of the las element still keeps it
+     */
     fieldArray.some(element =>{
         if(element.active === true){
             for(let field of document.querySelectorAll('#fieldContainer>*')){
@@ -144,7 +167,10 @@ const giveActiveStatusReload = ()=>{
 
 const getField = ()=>{
     if(JSON.parse(localStorage.getItem('fields'))){
-        fieldArray = JSON.parse(localStorage.getItem('fields')) //el array cada vez tiene nuevos valores
+        /**
+         * the array will have new values everytime the user interact with either the fields or the todos
+         */
+        fieldArray = JSON.parse(localStorage.getItem('fields')) 
         toggleActiveProperty()
         giveActiveStatusReload()
         giveFieldTodoTitleAValue() 
@@ -155,12 +181,15 @@ const getField = ()=>{
 getField()
 
 const removeFieldBtn = () =>{
+    // get the array to change it
     fieldArray = JSON.parse(localStorage.getItem('fields'))
     for(let removeFieldBtn of document.querySelectorAll('#fieldContainer>div>button')){
         removeFieldBtn.onclick = () => {
             fieldArray.forEach(field => {
                 if(field.id === removeFieldBtn.parentNode.getAttribute('id')){
                     fieldArray.splice(fieldArray.indexOf(field), 1)
+                    //everytime a field is remove the text content of the field todoTitle
+                    //where you see the title of the active field, should be empty
                     removeFieldBtn.parentNode.remove()
                     fieldTodoTitle.textContent = ""
                 }
@@ -179,13 +208,17 @@ const removeFieldBtn = () =>{
             })
         }
         localStorage.setItem('fields', JSON.stringify(fieldArray))
+        //set it back with the new changes
     }
     
 }
 removeFieldBtn()
 
 
-
+/**
+ * these two functions should render it everytime a field is added and everytime there is a
+ * reload
+ */
 const DOMrendererFromArray = (array) =>{
     array.forEach(element=>{
         let div = document.createElement('div')
