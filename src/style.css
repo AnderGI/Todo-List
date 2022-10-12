@@ -296,23 +296,6 @@ color: var(--peach);
     color: var(--peach);
 }
 
-
-/*AddTodo Btn*/
-/*
-button#addTodo{
-    padding: 4em;
-    border-radius: 50%;
-    font-size: 1rem;
-    font-weight: 700;
-
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    
-}
-*/
-/*Dialog*/
-
 dialog#todoDialog, dialog#showTodoInfo{
     position: absolute;
     top: 50%;
@@ -320,22 +303,42 @@ dialog#todoDialog, dialog#showTodoInfo{
     transform: translate(-50%, -50%);
 }
 
-dialog#todoDialog>form{
+dialog#todoDialog>form, dialog#showTodoInfo>form{
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.75em;
-    padding: 0.5em 0.75em;
+    gap: 2em;
+    padding: 1em 1.5em;
 
     font-family: Arial, Helvetica, sans-serif;
 }
 
-dialog#showTodoInfo{
-    padding: 0.5em 0.75em;
-    gap: 0.75em;
+dialog#todoDialog>form>button, dialog#showTodoInfo>form>button{
+    width: 100%;
+    padding: 0.75em;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 
+    border: none;
+    background-color: rgba(0,0,0,0);
+    font-size: 0.75rem;
+    font-weight: 800;
     font-family: Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+    letter-spacing: 0.0125em;
+
+    transition: all ease 0.2s;
 }
+
+dialog#todoDialog>form>button:hover, dialog#showTodoInfo>form>button:hover{
+    cursor: pointer;
+    color: var(--burntOrange);
+    background-color: var(--paleYellow);
+}
+
+
 
 
