@@ -1,4 +1,6 @@
 import { indexOf, remove, set, uniqueId } from 'lodash';
+import { format, formatDistance, subDays } from 'date-fns'
+
 import './style.css';
 const addFieldPopUpBtn = document.getElementById('addFieldDialogBtn')
 const fieldTitleInput = document.getElementById('fieldTitle') 
@@ -15,6 +17,7 @@ const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
 const addTodoLabel = document.getElementById('addTodoLabel')
 const todoSection = document.getElementById('todoSection')
+const todoDate = document.getElementById('todoDate')
 let fieldArray = []
 let todoArray = [] 
 
@@ -236,6 +239,8 @@ const todoCreator = (name,id)=>{
         checked: false,
         priority: "none",
         description: "none",
+        "current date": "none",
+        "submission date": "none",
       
     }
     return Object.assign(
@@ -408,6 +413,8 @@ const passPriorityValueFromDialogToTodo = (element) =>{
         if(object.uniqueId === element.parentNode.getAttribute('id')){
             object.priority = todoPriority.value
             object.description = todoDescription.value
+            object["current date"] = new Date()
+            object["submission date"] = todoDate.value
         }
     })
     localStorage.setItem('todos', JSON.stringify(todoArray))
@@ -420,12 +427,20 @@ const showTodoInfoDialog = () =>{
             addTodoInfoDialog.showModal()
             todoArray.forEach(object => {
                 if(object.uniqueId === showTodoInfoBtn.parentNode.getAttribute('id')){
-                    if(object.priority !== "none" && object.description !== "none"){
+                    if(object.priority !== "none" && object.description !== "none" && object["submission date"] !== "none" && object["current date"] !== "None"){
                         document.querySelector('[data-todo-priority]').innerHTML = object.priority
-                        document.querySelector('[data-todo-description]').innerHTML = object.description
+                        document.querySelector('[data-todo-description]').innerHTML = object.description    
+                        const result = formatDistance(
+                            new Date(object["submission date"]),
+                            new Date(object["current date"]),
+                            {addSuffix: true}
+                          )
+                          document.querySelector('[data-todo-date]').innerHTML = result
+                        
                     }else{
                         document.querySelector('[data-todo-priority]').innerHTML = "No priority has been added"
                         document.querySelector('[data-todo-description]').innerHTML = "No description has been added"
+                        document.querySelector('[data-todo-date]').innerHTML = "No submission date has been added"
                     }
 
                 }
@@ -441,7 +456,7 @@ const todoInfoDialogCloser = (el) =>{
 
     closeTodoInfoDialog.onclick = () =>{
         addTodoInfoDialog.close()  
-       
+        
     } 
 }
 todoInfoDialogCloser()
@@ -478,3 +493,15 @@ const renderColorToTodoDependignOnPriority = () =>{
     localStorage.setItem('todos', JSON.stringify(todoArray))
 }
 renderColorToTodoDependignOnPriority()
+/*
+const getDate = (dat) =>{
+    let today = dat
+    let todayDate = format(new Date(today.getFullYear(), today.getMonth(), today.getDay(),today.getHours(), today.getMinutes()), 'dd-MM-yyyy\'T\'HH:mm')
+    return todayDate
+}
+*/
+
+    
+   
+
+  
