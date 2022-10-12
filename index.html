@@ -17,7 +17,10 @@
           </select>
         </label>
         <label for="todoDescription"><h3>Todo Description: </h3>
-          <textarea  name="todoDescription" id="todoDescription" maxlength="50" cols="25" rows="25"></textarea>
+          <input type="text" name="todoDescription" id="todoDescription" maxlength="50" cols="50" rows="50">
+        </label>
+        <label for="todoDate"><h3>Submission date: </h3>
+          <input type="datetime-local" name="todoDate" id="todoDate">
         </label>
         <button type="submit" id="todoDialogBtn">Add info to Todo</button>
       </form>
@@ -29,6 +32,8 @@
         <p data-todo-priority></p>
         <h3><strong>Description:</strong></h3>
         <p data-todo-description></p>
+        <h3><strong>Submission Date:</strong></h3>
+        <p data-todo-date></p>
         <button type="submit" data-closeInfoDialog>Close</button>
       </form>
     </dialog>
