@@ -13,6 +13,8 @@ const closeTodoInfoDialog = document.querySelector('button[data-closeInfoDialog]
 
 const addTodoPopUpBtn = document.getElementById('addTodoDialogBtn')
 const todoTitleInput = document.getElementById('todoTitle')
+const addTodoLabel = document.getElementById('addTodoLabel')
+const todoSection = document.getElementById('todoSection')
 let fieldArray = []
 let todoArray = [] 
 
@@ -79,8 +81,24 @@ const changeTodoDisplay = (field) =>{
 //Toggle active property from false to treu every time an div with it's object (connected by id) is clicked
 const toggleActiveProperty = ()=>{
     fieldArray = JSON.parse(localStorage.getItem('fields')) || []
+    addTodoLabel.style.cssText = `
+    display: none;
+    `
+    todoSection.style.cssText = `
+    display: grid;
+    grid-template-rows: 0.5fr 4fr;
+    padding: 0.5em;
+    `
     for(let field of document.querySelectorAll('#fieldContainer>*')){
         field.onclick = function(){
+            todoSection.style.cssText = `
+            display: grid;
+            grid-template-rows: 0.5fr 0.5fr 4fr;
+            padding: 0.5em;
+            `
+            addTodoLabel.style.cssText = `
+            display: default;
+            `
             for(let field of document.querySelectorAll('#fieldContainer>*')){
                 field.classList.remove('active')
             }
