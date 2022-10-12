@@ -493,13 +493,7 @@ const renderColorToTodoDependignOnPriority = () =>{
     localStorage.setItem('todos', JSON.stringify(todoArray))
 }
 renderColorToTodoDependignOnPriority()
-/*
-const getDate = (dat) =>{
-    let today = dat
-    let todayDate = format(new Date(today.getFullYear(), today.getMonth(), today.getDay(),today.getHours(), today.getMinutes()), 'dd-MM-yyyy\'T\'HH:mm')
-    return todayDate
-}
-*/
+
 
     
    
