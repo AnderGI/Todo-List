@@ -8,23 +8,23 @@
   <body>
     <dialog id="todoDialog">
       <form action="#" method="dialog">
-        <legend><strong>Add info to todo</strong></legend>
-        <label for="todoPriority"> Todo Priority:
+        <legend><h1><strong>Add info to todo</strong></h1></legend>
+        <label for="todoPriority"> <h3>Todo Priority: </h3>
           <select name="todoPriority" id="todoPriority">
             <option value="It Can Wait">It Can Wait</option>
             <option value="Do Not Procastinate">Do Not Procastinate</option>
             <option value="Hurry Up!"> Hurry Up!</option>
           </select>
         </label>
-        <label for="todoDescription">Todo Description:
-          <input type="text" name="todoDescription" id="todoDescription" maxlength="50">
+        <label for="todoDescription"><h3>Todo Description: </h3>
+          <textarea  name="todoDescription" id="todoDescription" maxlength="50" cols="25" rows="25"></textarea>
         </label>
         <button type="submit" id="todoDialogBtn">Add info to Todo</button>
       </form>
     </dialog>
     <dialog id="showTodoInfo">
       <form action="#" method="dialog">
-        <legend><strong>Show todo info</strong></legend>
+        <legend><h1><strong>Todo info</strong></h1></legend>
         <h3><strong>Todo Priority: </strong></h3>
         <p data-todo-priority></p>
         <h3><strong>Description:</strong></h3>
