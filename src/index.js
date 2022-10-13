@@ -283,6 +283,10 @@ const todoCreator = (name,id)=>{
 }
 
 const addTodoToActiveField = () =>{
+    /**
+     * get the field array and todos array from local storage and add true to checked property to todos
+     * then retrive both todos and fields arrays to localStorage
+     */
     fieldArray = JSON.parse(localStorage.getItem('fields'))
     todoArray = JSON.parse(localStorage.getItem('todos')) || []
     fieldArray.forEach(object=>{
@@ -309,6 +313,10 @@ getTodoFromLocalStorage()
 
 
    let todoContainer = document.querySelector('[data-todo-container]')
+   /**
+    * Create the todo object once the add todo btn is selected and keep the rendering every time there is 
+    * a reload
+    */
 const todoDomRenderer = (object)=>{
     let todoDiv = document.createElement('div')
     todoDiv.setAttribute('class', object.id)
@@ -341,8 +349,6 @@ const todoDomRenderer = (object)=>{
     todoDiv.appendChild(removeBtnTodo)
  
     todoContainer.appendChild(todoDiv)
-
-   // removeTodo()
 }
 
 const todoDomRendererFromLocalStorage = () =>{
@@ -353,13 +359,14 @@ const todoDomRendererFromLocalStorage = () =>{
     })
     }
             
- 
-   //removeTodo()
 }
 
 todoDomRendererFromLocalStorage()
 
 const DefaultStart = () =>{
+    /**
+     * when there is no field select (with active class) all todos will be seen with the all todos title
+     */
     fieldTodoTitle.innerHTML = 'All todos'
     for(let fields of document.querySelectorAll('#fieldContainer>*')){
         fields.classList.remove('active')
@@ -369,6 +376,10 @@ const DefaultStart = () =>{
   
 const removeBtn = () =>{
     for(let removeBtn of document.querySelectorAll('[data-todo-container]>*>button')){
+        /**
+         * select every remove btn. Onec one is clicked the todo will be removed (splice with no other element removed) from the
+         * array and the dom
+         */
         removeBtn.onclick = (e) =>{
             let btn = e.target
             todoArray = JSON.parse(localStorage.getItem('todos'))
@@ -385,6 +396,10 @@ const removeBtn = () =>{
 removeBtn()
 
 const checkTodo = () =>{
+    /**
+     * add a data-checked attribute to every todo and a true or false checked property depending on if the id of the todo dom element
+     * is the same as the uniqueId of the object
+     */
     for(let checkbox of document.querySelectorAll('[data-todo-container]>*>input[type="checkbox"]')){
         checkbox.onclick = (e) =>{
             let inputCheckbox = e.target
@@ -410,7 +425,9 @@ const checkTodo = () =>{
 checkTodo()
 
 const maintainCheckProperty = () =>{
-   
+   /**
+    * this will keep the check property on the input type checkbox
+    */
     for(let todo of document.querySelectorAll('[data-todo-container]>*')){
         if(todo.getAttribute('data-checked') === "true"){
             todo.querySelector('input').checked = true
@@ -456,6 +473,10 @@ const passPriorityValueFromDialogToTodo = (element) =>{
 const showTodoInfoDialog = () =>{
     todoArray = JSON.parse(localStorage.getItem('todos'))
     for(let showTodoInfoBtn of document.querySelectorAll('.showTodoInfoBtn')){
+        /**
+         * get each btn that sghows the info from all the nodelist of showtodoinfobtn 
+         * everytime is clicked it will show the info every todo has. if it doesnt "no [x] has been added" will appear
+         */
         showTodoInfoBtn.onclick = () =>{
             addTodoInfoDialog.showModal()
             todoArray.forEach(object => {
@@ -495,6 +516,10 @@ const todoInfoDialogCloser = (el) =>{
 todoInfoDialogCloser()
 
 const renderColorToTodoDependignOnPriority = () =>{
+    /**
+     * this will change the color of every todo DOM element depending on it priority (the priority the user selected)
+     * if there is no priority it will have a snow color
+     */
     todoArray = JSON.parse(localStorage.getItem('todos'))
     todoArray.forEach(object =>{
         for(let todo of document.querySelectorAll('[data-todo-container]>*')){
