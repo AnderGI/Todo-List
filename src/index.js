@@ -349,6 +349,8 @@ const todoDomRenderer = (object)=>{
     todoDiv.appendChild(removeBtnTodo)
  
     todoContainer.appendChild(todoDiv)
+
+    
 }
 
 const todoDomRendererFromLocalStorage = () =>{
