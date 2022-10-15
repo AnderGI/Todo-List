@@ -1,5 +1,5 @@
 # Todo-List
-# This is the magic of programming: a bug appear 'outnowhere' (my bad)! once you add a todo you cannot see the info. I will solve this ASAP
+# This is the magic of programming:new bugs have appeared!
 This application has probably been one of the most challenging ones I have ever had during the first 4 months of pure daily-programming. It has been due to the fact that I had nearly no experience using localStorage and no experience using external libraries like date-fns (very useful by the way). Hence, I've learned a ton. All the funcionality is based on modular programming where, in this case, I have one file with different functions or modules that are responsible for one funcitonality.
 
 #How it works
