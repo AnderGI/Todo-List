@@ -107,10 +107,13 @@ main{
 /*DIV TODO SECTION*/
 
 #todoSection{
+   
     display: grid;
-    grid-template-rows: 0.5fr 0.5fr 4fr;
+    grid-template-rows: 0.5fr 4fr;
     padding: 0.5em;
+    
 }
+
 #todoSection>h1{
     display: flex;
     flex-flow: row wrap;
@@ -125,13 +128,14 @@ main{
 }
 /*Input adder*/
 #todoSection>label{
-    display: flex;
+    display: none;
     width: 100%;
     flex-flow: row wrap;
     align-items: center;
     justify-content: flex-start;
     gap: 0.5em;
 }
+
 #todoSection>label>input{
     width: 60%;
     height: 2em;
@@ -181,7 +185,7 @@ main{
 }
 div[data-todo-container]>div{
     border: 2px solid var(--darkWhite);
-    display: flex;
+    display: none;
     flex-flow: row wrap;
     align-items: center;
     padding: 0.5em 1em;
@@ -195,6 +199,9 @@ div[data-todo-container]>div{
     box-shadow: -0.25em 0.025em 0.125em 0.0625em var(--darkWhite);
 
     text-decoration: none;
+}
+div[data-todo-container]>div.active{
+    display: flex;
 }
 div[data-todo-container]>div[data-checked = 'true']{
     text-decoration: line-through;
