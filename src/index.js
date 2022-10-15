@@ -40,17 +40,19 @@ addFieldPopUpBtn.addEventListener('click', ()=>{
         DOMrenderer(fieldCreator(fieldTitleInput.value))
         console.log(fieldArray)
         localStorage.setItem('fields', JSON.stringify(fieldArray))
-        addActiveTOFieldObject()
-        removeFieldBtn()
+        //addActiveTOFieldObject()
+        //removeFieldBtn()
     }else{
         fieldArray = []
         fieldArray.push(fieldCreator(fieldTitleInput.value))
         console.log(fieldArray)
         DOMrenderer(fieldCreator(fieldTitleInput.value))
         localStorage.setItem('fields', JSON.stringify(fieldArray))
+        //addActiveTOFieldObject()
+        //removeFieldBtn()
+    }
         addActiveTOFieldObject()
         removeFieldBtn()
-    }
     fieldTitleInput.value = ""
 })
 
