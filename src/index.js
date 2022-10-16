@@ -38,21 +38,19 @@ addFieldPopUpBtn.addEventListener('click', ()=>{
         fieldArray = JSON.parse(localStorage.getItem('fields'))
         fieldArray.push(fieldCreator(fieldTitleInput.value))
         DOMrenderer(fieldCreator(fieldTitleInput.value))
-        console.log(fieldArray)
         localStorage.setItem('fields', JSON.stringify(fieldArray))
-        //addActiveTOFieldObject()
-        //removeFieldBtn()
+        addActiveTOFieldObject()
+        removeFieldBtn()
     }else{
         fieldArray = []
         fieldArray.push(fieldCreator(fieldTitleInput.value))
-        console.log(fieldArray)
         DOMrenderer(fieldCreator(fieldTitleInput.value))
         localStorage.setItem('fields', JSON.stringify(fieldArray))
-        //addActiveTOFieldObject()
-        //removeFieldBtn()
-    }
         addActiveTOFieldObject()
         removeFieldBtn()
+    }
+        //addActiveTOFieldObject()
+        //removeFieldBtn()
     fieldTitleInput.value = ""
 })
 
@@ -292,19 +290,23 @@ addTodoPopUpBtn.addEventListener('click', ()=>{
     if(JSON.parse(localStorage.getItem('todos'))){
         todoArray = JSON.parse(localStorage.getItem('todos'))
         addTodoToActiveField()
-        console.log(todoArray)
         localStorage.setItem('todos', JSON.stringify(todoArray))
         todoDomRenderer()
         removeBtn()
+        addTodoInfoBtn()
+        showTodoInfo()
     }else{
         todoArray = []
         addTodoToActiveField()
-        console.log(todoArray)
         localStorage.setItem('todos', JSON.stringify(todoArray))
         todoDomRenderer()
         removeBtn()
+        addTodoInfoBtn()
+        showTodoInfo()
     }
     checkTodo()
+    //addTodoInfoDialogShower()
+    //todoAddInfoDialogCloser()
     todoTitleInput.value = ""
    
 })
@@ -342,7 +344,6 @@ const addTodoToActiveField = () =>{
                     localStorage.setItem('todos', JSON.stringify(todoArray))
                 }else{
                     todoArray.push(todoCreator(todoTitleInput.value, object.id, object.active))
-                    console.log(todoArray)
                 }
 
                     //todoDomRenderer(todoCreator(todoTitleInput.value, object.id))
@@ -374,6 +375,9 @@ const setInfoToTodo = (array) =>{
     let addInfoBtn = document.createElement('button')
     addInfoBtn.innerHTML = 'add info'
     addInfoBtn.setAttribute('class','addTodoInfoBtn')
+    /*addInfoBtn.onclick = function(){
+        addTodoInfoDialogShower()
+    }*/
  /*addInfoBtn.onclick = () =>{
      todoDialog.showModal()
      todoDialogBtn.onclick = () =>{
@@ -456,6 +460,9 @@ const todoItemRenderer = (obj) =>{
     let addInfoBtn = document.createElement('button')
     addInfoBtn.innerHTML = 'add info'
     addInfoBtn.setAttribute('class','addTodoInfoBtn')
+   /* addInfoBtn.onclick = function(){
+        addTodoInfoDialogShower()
+    }*/
  /*addInfoBtn.onclick = () =>{
      todoDialog.showModal()
      todoDialogBtn.onclick = () =>{
@@ -528,9 +535,15 @@ const todoDomRenderer = ()=>{
         todoArray = JSON.parse(localStorage.getItem('todos'))
         setInfoToTodo(todoArray)
         localStorage.setItem('todos', JSON.stringify(todoArray))
+        //addTodoInfoDialogShower()
+        //todoAddInfoDialogCloser()
     }else{
         setInfoToTodo(todoArray)
+        //addTodoInfoDialogShower()
+        //todoAddInfoDialogCloser()
     }
+    //addTodoInfoDialogShower()
+    //todoAddInfoDialogCloser()
   
 }
 
@@ -546,6 +559,51 @@ const todoDomRendererFromLocalStorage = () =>{
          
 }
 todoDomRendererFromLocalStorage()
+/*
+const addTodoInfoDialogShower = () =>{
+   for(let addTodoInfoBtn of document.querySelectorAll('button.addTodoInfoBtn')){
+        addTodoInfoBtn.onclick = function(){
+            todoDialog.showModal()
+            todoAddInfoDialogCloser(addTodoInfoBtn)
+        }
+    }
+}
+addTodoInfoDialogShower()
+
+const todoAddInfoDialogCloser = (el) => {
+    todoDialogBtn.onclick = () =>{
+        todoDialog.close()
+
+        passPriorityValueFromDialogToTodo(el)
+    }
+}
+
+
+
+const passPriorityValueFromDialogToTodo = (element) =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.forEach(object=>{
+        if(object.uniqueId === element.parentNode.getAttribute('id')){
+            object.priority = todoPriority.value
+            object.description = todoDescription.value
+            object["current date"] = new Date()
+            object["submission date"] = todoDate.value
+        }
+    })
+    localStorage.setItem('todos', JSON.stringify(todoArray))
+}
+
+const showTodoInfoBtn = () =>{
+    for(let showTodoInfoBtn of document.querySelectorAll('[data-todo-container]>*>button.showTodoInfoBtn')){
+        showTodoInfoBtn.onclick = function(){
+            console.log('info showed')
+        }
+    }
+}
+showTodoInfoBtn()
+*/
+
+
 
 
 
@@ -981,6 +1039,85 @@ const checkTodo = () =>{
 
 checkTodo()
 
+const addTodoInfoBtn = () =>{
+    for(let addTodoInfoBtn of document.querySelectorAll('[data-todo-container]>*>.addTodoInfoBtn')){
+        /**
+         * select every remove btn. Onec one is clicked the todo will be removed (splice with no other element removed) from the
+         * array and the dom
+         */
+        addTodoInfoBtn.onclick = () =>{
+            /*todoArray = JSON.parse(localStorage.getItem('todos'))
+            todoArray.forEach(object=>{
+                if(object.uniqueId === removeBtn.getAttribute('class')){
+                    todoArray.splice(todoArray.indexOf(object),1)
+                    removeBtn.parentNode.remove()
+                }
+            })
+            localStorage.setItem('todos', JSON.stringify(todoArray))*/
+            todoPriority.value = ""
+            todoDescription.value = ""
+            todoDate.value = ""
+            todoDialog.showModal()
+            closeAddTodoInfoBtn(addTodoInfoBtn)
+        }
+    }
+}
+addTodoInfoBtn()
+
+const closeAddTodoInfoBtn = (el) =>{
+    todoDialogBtn.onclick = () =>{
+        todoDialog.close()
+
+        passPriorityValueFromDialogToTodo(el)
+    }
+}
+
+const passPriorityValueFromDialogToTodo = (element) =>{
+    todoArray = JSON.parse(localStorage.getItem('todos'))
+    todoArray.forEach(object=>{
+        if(object.uniqueId === element.parentNode.getAttribute('id')){
+            object.priority = todoPriority.value
+            object.description = todoDescription.value
+            object["current date"] = new Date()
+            object["submission date"] = todoDate.value
+        }
+    })
+    localStorage.setItem('todos', JSON.stringify(todoArray))
+}
+
+const showTodoInfo = () =>{
+    for(let showTodoInfoBtn of document.querySelectorAll('[data-todo-container]>*>.showTodoInfoBtn')){
+        showTodoInfoBtn.onclick = () =>{
+            addTodoInfoDialog.showModal()
+            todoArray = JSON.parse(localStorage.getItem('todos'))
+            todoArray.forEach(object => {
+                if(object.uniqueId === showTodoInfoBtn.parentNode.getAttribute('id')){
+                    if(object.priority !== "none" && object.description !== "none" && object["submission date"] !== "none" && object["current date"] !== "None"){
+                        document.querySelector('[data-todo-priority]').innerHTML = object.priority
+                        document.querySelector('[data-todo-description]').innerHTML = object.description    
+                        const result = formatDistance(
+                            new Date(object["submission date"]),
+                            new Date(object["current date"]),
+                            {addSuffix: true}
+                          )
+                          document.querySelector('[data-todo-date]').innerHTML = result
+                        
+                    }else{
+                        document.querySelector('[data-todo-priority]').innerHTML = "No priority has been added"
+                        document.querySelector('[data-todo-description]').innerHTML = "No description has been added"
+                        document.querySelector('[data-todo-date]').innerHTML = "No submission date has been added"
+                    }
+
+                }
+            })
+        }
+        localStorage.setItem('todos', JSON.stringify(todoArray))
+    }
+}
+showTodoInfo()
+
+
+
 const maintainCheckProperty = () =>{
    /**
     * this will keep the check property on the input type checkbox
@@ -995,7 +1132,7 @@ const maintainCheckProperty = () =>{
 }
 
 //maintainCheckProperty()
-
+/*/
 const todoDialogShower = () =>{
     for(let addInfoBtn of document.querySelectorAll('.addTodoInfoBtn')){
         addInfoBtn.onclick = () =>{
@@ -1011,9 +1148,9 @@ const todoDialogCloser = (el) => {
         todoDialog.close()
         //passPriorityValueFromDialogToTodo(el)
     }*/
-}
+//}
 
-
+/*
 const passPriorityValueFromDialogToTodo = (element) =>{
     todoArray = JSON.parse(localStorage.getItem('todos'))
     todoArray.forEach(object=>{
@@ -1026,7 +1163,7 @@ const passPriorityValueFromDialogToTodo = (element) =>{
     })
     localStorage.setItem('todos', JSON.stringify(todoArray))
 }
-
+*/
 const showTodoInfoDialog = () =>{
     todoArray = JSON.parse(localStorage.getItem('todos'))
     for(let showTodoInfoBtn of document.querySelectorAll('.showTodoInfoBtn')){
@@ -1057,8 +1194,9 @@ const showTodoInfoDialog = () =>{
                 }
             })
         }
+        localStorage.setItem('todos', JSON.stringify(todoArray))
     }
-    localStorage.setItem('todos', JSON.stringify(todoArray))
+   
 }
 
 //showTodoInfoDialog()
